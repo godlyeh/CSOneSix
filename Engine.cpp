@@ -21,7 +21,7 @@ void HookEngineTable()
 	DWORD dwEnginePointer = Utility->FindPattern("client.dll", "BF ? ? ? ? F3 A5");
 
 	Utility->DeleteLog("Engine.txt");
-	Utility->Log("Engine.txt", "Engine Pointer: 0x%p\n", dwEnginePointer);
+	Utility->Log("Engine.txt", "Engine Pointer: 0x%p (Module: 0x%p)\n", dwEnginePointer, Utility->CalcModuleOffset(dwEnginePointer));
 
 	g_pEngine = (cl_enginefunc_t*)dwEnginePointer;
 	memcpy(&g_oEngine, g_pEngine, sizeof(cl_enginefunc_t));

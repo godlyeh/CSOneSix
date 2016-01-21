@@ -83,6 +83,7 @@
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="KButton.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="OpenGL32.cpp" />
     <ClCompile Include="SDK\parsemsg.cpp" />
     <ClCompile Include="SDK\util.cpp" />
     <ClCompile Include="Studio.cpp" />
@@ -99,6 +100,7 @@
     <ClInclude Include="Event.h" />
     <ClInclude Include="KButton.h" />
     <ClInclude Include="Main.h" />
+    <ClInclude Include="OpenGL32.h" />
     <ClInclude Include="SDK\anorms.h" />
     <ClInclude Include="SDK\beamdef.h" />
     <ClInclude Include="SDK\cdll_dll.h" />

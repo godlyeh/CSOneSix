@@ -18,13 +18,13 @@ void HookCVarList()
 	dwCVarListPointer = *(PDWORD)dwCVarListPointer;
 
 	Utility->DeleteLog("CVars.txt");
-	Utility->Log("CVars.txt", "CVar List Pointer: 0x%p\n", dwCVarListPointer);
+	Utility->Log("CVars.txt", "CVar List Pointer: 0x%p (Module: 0x%p)\n", dwCVarListPointer, Utility->CalcModuleOffset(dwCVarListPointer));
 
 	g_pCVarList = (hl_cvar_t*)dwCVarListPointer;
 
 	while (g_pCVarList)
 	{
-		Utility->Log("CVars.txt", " [CVarList][0x%p] %s = 0x%p (%.2f)\n", g_pCVarList, g_pCVarList->Name, g_pCVarList->Function, g_pCVarList->Value);
+		Utility->Log("CVars.txt", " [CVarList][0x%p] %s = 0x%p (%.2f) (Module: 0x%p)\n", g_pCVarList, g_pCVarList->Name, g_pCVarList->Function, g_pCVarList->Value, Utility->CalcModuleOffset((DWORD)g_pCVarList));
 		g_pCVarList = g_pCVarList->Next;
 	}
 

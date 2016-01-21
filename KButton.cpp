@@ -18,13 +18,13 @@ void HookKeyBindings()
 	dwKeybindingPointer = *(PDWORD)dwKeybindingPointer;
 
 	Utility->DeleteLog("KeyBinding.txt");
-	Utility->Log("KeyBinding.txt", "Key Binding Pointer: 0x%p\n", dwKeybindingPointer);
+	Utility->Log("KeyBinding.txt", "Key Binding Pointer: 0x%p (Module: 0x%p)\n", dwKeybindingPointer, Utility->CalcModuleOffset(dwKeybindingPointer));
 
 	g_pKeyBinding = (kblist_t*)dwKeybindingPointer;
 
 	while (g_pKeyBinding)
 	{
-		Utility->Log("KeyBinding.txt", " [KeyBinding][0x%p] %s = 0x%p\n", g_pKeyBinding, g_pKeyBinding->Name, g_pKeyBinding->Key);
+		Utility->Log("KeyBinding.txt", " [KeyBinding][0x%p] %s = 0x%p (Module: 0x%p)\n", g_pKeyBinding, g_pKeyBinding->Name, g_pKeyBinding->Key, Utility->CalcModuleOffset((DWORD)g_pKeyBinding));
 		g_pKeyBinding = g_pKeyBinding->Next;
 	}
 

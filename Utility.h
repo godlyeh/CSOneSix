@@ -26,7 +26,8 @@ public:
 	ModuleInfo* GetModule(char *Module, DWORD dwBaseAddress = 0);
 	void GenerateModuleList();
 
-	// Pattern scan
+	// Memory handling
+	DWORD CalcModuleOffset(DWORD Address);
 	bool __fastcall CompareBytes(BYTE* GameData, BYTE* Pattern, int Size);
 	DWORD __fastcall FindPattern(char* szModule, char* szPattern, bool RetrieveAddress = true);
 

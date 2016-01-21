@@ -24,6 +24,7 @@ void Hook()
 	HookEventList();
 	HookUserMsgList();
 	HookExportTable();
+	HookOpenGLTable();
 }
 // ===================================================================================
 
@@ -32,7 +33,7 @@ void Hook()
 // Unhook hack
 void Unhook()
 {
-	UnhookEngineTable(); // Hook engine table first
+	UnhookEngineTable();
 	UnhookStudioTable();
 	UnhookCommandList();
 	UnhookCVarList();
@@ -40,6 +41,7 @@ void Unhook()
 	UnhookEventList();
 	UnhookUserMsgList();
 	UnhookExportTable();
+	UnhookOpenGLTable();
 }
 // ===================================================================================
 

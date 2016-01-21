@@ -18,13 +18,13 @@ void HookEventList()
 	dwEventListPointer = *(PDWORD)dwEventListPointer;
 
 	Utility->DeleteLog("Events.txt");
-	Utility->Log("Events.txt", "Event List Pointer: 0x%p\n", dwEventListPointer);
+	Utility->Log("Events.txt", "Event List Pointer: 0x%p (Module: 0x%p)\n", dwEventListPointer, Utility->CalcModuleOffset(dwEventListPointer));
 
 	g_pEventList = (event_t*)dwEventListPointer;
 
 	while (g_pEventList)
 	{
-		Utility->Log("Events.txt", " [EventList][0x%p] %s = 0x%p\n", g_pEventList, g_pEventList->Name, g_pEventList->Function);
+		Utility->Log("Events.txt", " [EventList][0x%p] %s = 0x%p (Module: 0x%p)\n", g_pEventList, g_pEventList->Name, g_pEventList->Function, Utility->CalcModuleOffset((DWORD)g_pEventList));
 		g_pEventList = g_pEventList->Next;
 	}
 

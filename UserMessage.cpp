@@ -18,13 +18,13 @@ void HookUserMsgList()
 	dwUserMsgPointer = *(PDWORD)dwUserMsgPointer;
 
 	Utility->DeleteLog("UserMsg.txt");
-	Utility->Log("UserMsg.txt", "UserMsg List Pointer: 0x%p\n", dwUserMsgPointer);
+	Utility->Log("UserMsg.txt", "UserMsg List Pointer: 0x%p (Module: 0x%p)\n", dwUserMsgPointer, Utility->CalcModuleOffset(dwUserMsgPointer));
 
 	g_pUserMsg = (usermsg_t*)dwUserMsgPointer;
 
 	while (g_pUserMsg)
 	{
-		Utility->Log("UserMsg.txt", " [UserMsgList][0x%p] %s = 0x%p\n", g_pUserMsg, g_pUserMsg->Name, g_pUserMsg->Function);
+		Utility->Log("UserMsg.txt", " [UserMsgList][0x%p] %s = 0x%p (Module: 0x%p)\n", g_pUserMsg, g_pUserMsg->Name, g_pUserMsg->Function, Utility->CalcModuleOffset((DWORD)g_pUserMsg));
 		g_pUserMsg = g_pUserMsg->Next;
 	}
 

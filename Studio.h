@@ -1,4 +1,3 @@
-
 // ===================================================================================
 // Externals
 extern engine_studio_api_t* g_pStudio;
@@ -16,7 +15,7 @@ namespace StudioHelper
 
 
 // ===================================================================================
-// Engine table hook
+// Studio table hook
 void HookStudioTable();
 void UnhookStudioTable();
 // ===================================================================================

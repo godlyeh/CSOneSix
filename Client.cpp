@@ -19,7 +19,7 @@ void HUD_Redraw(float time, int intermission)
 
 	if (EngineHelper::IsConnected())
 	{
-		g_Draw::DrawString(false, 25, 200, rgb(255, 0, 0), "0x%p", g_pEngine->);
+		//g_Draw::DrawString(false, 25, 200, rgb(255, 0, 0), "0x%p", g_pEngine->);
 	}
 }
 // ===================================================================================
@@ -32,7 +32,7 @@ void HookExportTable()
 	DWORD dwExportPointer = Utility->FindPattern("hw.dll", "68 ? ? ? ? E8 ? ? ? ? 83 C4 0C E8 ? ? ? ? E8 ? ? ? ?");
 
 	Utility->DeleteLog("Exports.txt");
-	Utility->Log("Exports.txt", "Export Pointer: 0x%p\n", dwExportPointer);
+	Utility->Log("Exports.txt", "Export Pointer: 0x%p (Module: 0x%p)\n", dwExportPointer, Utility->CalcModuleOffset(dwExportPointer));
 
 	g_pExport = (export_t*)dwExportPointer;
 	memcpy(&g_oExport, g_pExport, sizeof(export_t));

@@ -31,10 +31,7 @@ namespace EngineHelper
 		Utility->DeleteLog("HUD.txt");
 		Utility->Log("HUD.txt", "HUD Pointer: 0x%p\n", dwHUDPointer);
 
-		Utility->Log("HUD.txt", "Sprite List: 0x%p\n", g_pSpriteList);
-
-		for (int i = 0; i < 216; ++i)
-			Utility->Log("HUD.txt", " [SpriteList] %s (%s) = 0x%p\n", g_pSpriteList[i].szName, g_pSpriteList[i].szSprite, g_pSprite[i]);
+		Utility->Log("HUD.txt", "HUD Sprite List: 0x%p\n", g_pSpriteList);
 	}
 
 	static void Initialize()

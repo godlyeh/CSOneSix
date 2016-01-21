@@ -115,7 +115,25 @@ void UtilityHandler::GenerateModuleList()
 
 
 // ===================================================================================
-// Pattern scan
+// Memory handling
+DWORD UtilityHandler::CalcModuleOffset(DWORD Address)
+{
+	DWORD Base = 0;
+
+	for (int i = 0; i < (int)Modules.size(); ++i)
+	{
+		if (Address < Modules[i].BaseAddress || Address > Modules[i].BaseAddress + Modules[i].Size)
+			continue;
+
+		if (!_stricmp(Modules[i].Name, "hw.dll")) Base = 0x1D00000;
+		if (!_stricmp(Modules[i].Name, "client.dll")) Base = 0x1900000;
+
+		return Base + (Address - Modules[i].BaseAddress);
+	}
+
+	return 0;
+}
+
 bool __fastcall UtilityHandler::CompareBytes(BYTE* GameData, BYTE* Pattern, int Size)
 {
 	for (int i = 0; i < Size; ++i)

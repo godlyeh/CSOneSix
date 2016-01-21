@@ -70,6 +70,9 @@
     <ClCompile Include="UserMessage.cpp">
       <Filter>Hack\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="OpenGL32.cpp">
+      <Filter>Hack\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h">
@@ -286,6 +289,9 @@
       <Filter>Hack\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="UserMessage.h">
+      <Filter>Hack\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGL32.h">
       <Filter>Hack\Header Files</Filter>
     </ClInclude>
   </ItemGroup>

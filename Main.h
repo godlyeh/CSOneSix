@@ -39,6 +39,7 @@
 #include "Engine.h"
 #include "Event.h"
 #include "KButton.h"
+#include "OpenGL32.h"
 #include "Studio.h"
 #include "UserMessage.h"
 // ===================================================================================
