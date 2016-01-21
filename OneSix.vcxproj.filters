@@ -1,0 +1,292 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="SDK">
+      <UniqueIdentifier>{8d105aec-aa1d-4b81-b605-9399aa850b94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hack">
+      <UniqueIdentifier>{64835f07-1bd8-453b-bfd1-2dc857fd6e63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hack\Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Misc">
+      <UniqueIdentifier>{9f81b238-0e01-4661-903b-63d403658212}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc\Source Files">
+      <UniqueIdentifier>{8d52c152-71f7-4ac8-a586-b712df434d9b}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Misc\Header Files">
+      <UniqueIdentifier>{bae161e5-8c54-4176-a72a-9af6475e7fd7}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Hack\Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>Hack\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SDK\parsemsg.cpp">
+      <Filter>SDK</Filter>
+    </ClCompile>
+    <ClCompile Include="SDK\util.cpp">
+      <Filter>SDK</Filter>
+    </ClCompile>
+    <ClCompile Include="Client.cpp">
+      <Filter>Hack\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Utility.cpp">
+      <Filter>Misc\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ADE32.cpp">
+      <Filter>Misc\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Drawing.cpp">
+      <Filter>Hack\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine.cpp">
+      <Filter>Hack\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Studio.cpp">
+      <Filter>Hack\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Command.cpp">
+      <Filter>Hack\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="KButton.cpp">
+      <Filter>Hack\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CVar.cpp">
+      <Filter>Hack\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Event.cpp">
+      <Filter>Hack\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UserMessage.cpp">
+      <Filter>Hack\Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Main.h">
+      <Filter>Hack\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\anorms.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\beamdef.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\cdll_dll.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\cdll_engine_dll.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\cdll_int.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\cl_dll.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\cl_entity.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\com_model.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\const.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\con_nprint.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\crc.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\custom.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\customentity.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\cvardef.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\demo_api.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\director_cmds.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\dlight.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\dll_state.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\edict.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\eiface.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\engine_launcher_api.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\entity_state.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\entity_types.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\event_api.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\event_args.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\event_flags.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\exefuncs.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\exporttable.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\hltv.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\interface.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\in_buttons.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\itrackeruser.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\ivoicetweak.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\keydefs.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\mathlib.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\netadr.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\net_api.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\nowin.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\parsemsg.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\particledef.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\pmtrace.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\pm_defs.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\pm_info.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\progdefs.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\progs.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\qfont.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\ref_params.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\r_efx.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\r_studioint.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\screenfade.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\shake.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\sprites.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\studio.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\studio_event.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\triangleapi.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\usercmd.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\util.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\util_vector.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\weaponinfo.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\wrect.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="Client.h">
+      <Filter>Hack\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility.h">
+      <Filter>Misc\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ADE32.h">
+      <Filter>Misc\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Drawing.h">
+      <Filter>Hack\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine.h">
+      <Filter>Hack\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Studio.h">
+      <Filter>Hack\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Command.h">
+      <Filter>Hack\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="KButton.h">
+      <Filter>Hack\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CVar.h">
+      <Filter>Hack\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Event.h">
+      <Filter>Hack\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UserMessage.h">
+      <Filter>Hack\Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

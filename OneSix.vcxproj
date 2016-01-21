@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{90DBE1DB-2031-4BEE-B7D9-D2F6A74A3B12}</ProjectGuid>
+    <RootNamespace>OneSix</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>OneSix\</OutDir>
+    <TargetName>OneSix</TargetName>
+    <TargetExt>.dll</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>OneSix\</OutDir>
+    <TargetName>OneSix</TargetName>
+    <TargetExt>.dll</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <ManifestFile>Release\$(TargetName)$(TargetExt).intermediate.manifest</ManifestFile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="ADE32.cpp" />
+    <ClCompile Include="Client.cpp" />
+    <ClCompile Include="Command.cpp" />
+    <ClCompile Include="CVar.cpp" />
+    <ClCompile Include="Drawing.cpp" />
+    <ClCompile Include="Engine.cpp" />
+    <ClCompile Include="Event.cpp" />
+    <ClCompile Include="KButton.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="SDK\parsemsg.cpp" />
+    <ClCompile Include="SDK\util.cpp" />
+    <ClCompile Include="Studio.cpp" />
+    <ClCompile Include="UserMessage.cpp" />
+    <ClCompile Include="Utility.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ADE32.h" />
+    <ClInclude Include="Client.h" />
+    <ClInclude Include="Command.h" />
+    <ClInclude Include="CVar.h" />
+    <ClInclude Include="Drawing.h" />
+    <ClInclude Include="Engine.h" />
+    <ClInclude Include="Event.h" />
+    <ClInclude Include="KButton.h" />
+    <ClInclude Include="Main.h" />
+    <ClInclude Include="SDK\anorms.h" />
+    <ClInclude Include="SDK\beamdef.h" />
+    <ClInclude Include="SDK\cdll_dll.h" />
+    <ClInclude Include="SDK\cdll_engine_dll.h" />
+    <ClInclude Include="SDK\cdll_int.h" />
+    <ClInclude Include="SDK\cl_dll.h" />
+    <ClInclude Include="SDK\cl_entity.h" />
+    <ClInclude Include="SDK\com_model.h" />
+    <ClInclude Include="SDK\const.h" />
+    <ClInclude Include="SDK\con_nprint.h" />
+    <ClInclude Include="SDK\crc.h" />
+    <ClInclude Include="SDK\custom.h" />
+    <ClInclude Include="SDK\customentity.h" />
+    <ClInclude Include="SDK\cvardef.h" />
+    <ClInclude Include="SDK\demo_api.h" />
+    <ClInclude Include="SDK\director_cmds.h" />
+    <ClInclude Include="SDK\dlight.h" />
+    <ClInclude Include="SDK\dll_state.h" />
+    <ClInclude Include="SDK\edict.h" />
+    <ClInclude Include="SDK\eiface.h" />
+    <ClInclude Include="SDK\engine_launcher_api.h" />
+    <ClInclude Include="SDK\entity_state.h" />
+    <ClInclude Include="SDK\entity_types.h" />
+    <ClInclude Include="SDK\event_api.h" />
+    <ClInclude Include="SDK\event_args.h" />
+    <ClInclude Include="SDK\event_flags.h" />
+    <ClInclude Include="SDK\exefuncs.h" />
+    <ClInclude Include="SDK\exporttable.h" />
+    <ClInclude Include="SDK\hltv.h" />
+    <ClInclude Include="SDK\interface.h" />
+    <ClInclude Include="SDK\in_buttons.h" />
+    <ClInclude Include="SDK\itrackeruser.h" />
+    <ClInclude Include="SDK\ivoicetweak.h" />
+    <ClInclude Include="SDK\keydefs.h" />
+    <ClInclude Include="SDK\mathlib.h" />
+    <ClInclude Include="SDK\netadr.h" />
+    <ClInclude Include="SDK\net_api.h" />
+    <ClInclude Include="SDK\nowin.h" />
+    <ClInclude Include="SDK\parsemsg.h" />
+    <ClInclude Include="SDK\particledef.h" />
+    <ClInclude Include="SDK\pmtrace.h" />
+    <ClInclude Include="SDK\pm_defs.h" />
+    <ClInclude Include="SDK\pm_info.h" />
+    <ClInclude Include="SDK\progdefs.h" />
+    <ClInclude Include="SDK\progs.h" />
+    <ClInclude Include="SDK\qfont.h" />
+    <ClInclude Include="SDK\ref_params.h" />
+    <ClInclude Include="SDK\r_efx.h" />
+    <ClInclude Include="SDK\r_studioint.h" />
+    <ClInclude Include="SDK\screenfade.h" />
+    <ClInclude Include="SDK\shake.h" />
+    <ClInclude Include="SDK\sprites.h" />
+    <ClInclude Include="SDK\studio.h" />
+    <ClInclude Include="SDK\studio_event.h" />
+    <ClInclude Include="SDK\triangleapi.h" />
+    <ClInclude Include="SDK\usercmd.h" />
+    <ClInclude Include="SDK\util.h" />
+    <ClInclude Include="SDK\util_vector.h" />
+    <ClInclude Include="SDK\weaponinfo.h" />
+    <ClInclude Include="SDK\wrect.h" />
+    <ClInclude Include="Studio.h" />
+    <ClInclude Include="UserMessage.h" />
+    <ClInclude Include="Utility.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
