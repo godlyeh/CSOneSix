@@ -89,6 +89,7 @@
     <ClCompile Include="Studio.cpp" />
     <ClCompile Include="UserMessage.cpp" />
     <ClCompile Include="Utility.cpp" />
+    <ClCompile Include="Variables.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ADE32.h" />
@@ -164,6 +165,7 @@
     <ClInclude Include="Studio.h" />
     <ClInclude Include="UserMessage.h" />
     <ClInclude Include="Utility.h" />
+    <ClInclude Include="Variables.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

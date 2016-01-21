@@ -28,9 +28,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>Hack\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SDK\parsemsg.cpp">
       <Filter>SDK</Filter>
     </ClCompile>
@@ -73,11 +70,14 @@
     <ClCompile Include="OpenGL32.cpp">
       <Filter>Hack\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Variables.cpp">
+      <Filter>Misc\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Misc\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Main.h">
-      <Filter>Hack\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="SDK\anorms.h">
       <Filter>SDK</Filter>
     </ClInclude>
@@ -293,6 +293,12 @@
     </ClInclude>
     <ClInclude Include="OpenGL32.h">
       <Filter>Hack\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Variables.h">
+      <Filter>Misc\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Main.h">
+      <Filter>Misc\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

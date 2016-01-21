@@ -19,7 +19,7 @@ void HUD_Redraw(float time, int intermission)
 
 	if (EngineHelper::IsConnected())
 	{
-		//g_Draw::DrawString(false, 25, 200, rgb(255, 0, 0), "0x%p", g_pEngine->);
+		
 	}
 }
 // ===================================================================================

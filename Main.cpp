@@ -14,6 +14,7 @@ char g_szHackDir[MAX_PATH] = "\0";
 // Hook hack
 void Hook()
 {
+	Variable::Initialize();
 	Utility->GenerateModuleList();
 
 	HookEngineTable(); // Hook engine table first

@@ -6,6 +6,7 @@
 #include <Windows.h>
 #include <IOStream>
 #include <FStream>
+#include <String>
 #include <Vector>
 #include <Psapi.h>
 #include <GL\GL.h>
@@ -30,6 +31,7 @@
 #include "SDK/net_api.h"
 
 #include "ADE32.h"
+#include "Variables.h"
 #include "Utility.h"
 
 #include "Client.h"
