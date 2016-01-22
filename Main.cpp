@@ -26,6 +26,7 @@ void Hook()
 	HookUserMsgList();
 	HookExportTable();
 	HookOpenGLTable();
+	//HookSound();
 }
 // ===================================================================================
 
@@ -34,6 +35,8 @@ void Hook()
 // Unhook hack
 void Unhook()
 {
+	Variable::Save("Variables.cfg");
+
 	UnhookEngineTable();
 	UnhookStudioTable();
 	UnhookCommandList();
@@ -43,6 +46,7 @@ void Unhook()
 	UnhookUserMsgList();
 	UnhookExportTable();
 	UnhookOpenGLTable();
+	//UnhookSound();
 }
 // ===================================================================================
 

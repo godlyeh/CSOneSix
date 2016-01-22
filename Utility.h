@@ -28,6 +28,7 @@ public:
 	void GenerateModuleList();
 
 	// Memory handling
+	THREADENTRY32* GetProcessThread();
 	DWORD CalcModuleOffset(DWORD Address);
 	bool __fastcall CompareBytes(BYTE* GameData, BYTE* Pattern, int Size);
 	DWORD __fastcall FindPattern(char* szModule, char* szPattern, bool RetrieveAddress = true);

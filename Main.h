@@ -9,6 +9,7 @@
 #include <String>
 #include <Vector>
 #include <Psapi.h>
+#include <TlHelp32.h>
 #include <GL\GL.h>
 
 #include "SDK/wrect.h"
@@ -42,6 +43,7 @@
 #include "Event.h"
 #include "KButton.h"
 #include "OpenGL32.h"
+#include "Sound.h"
 #include "Studio.h"
 #include "UserMessage.h"
 // ===================================================================================

@@ -76,6 +76,9 @@
     <ClCompile Include="Main.cpp">
       <Filter>Misc\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Sound.cpp">
+      <Filter>Hack\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SDK\anorms.h">
@@ -299,6 +302,9 @@
     </ClInclude>
     <ClInclude Include="Main.h">
       <Filter>Misc\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound.h">
+      <Filter>Hack\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

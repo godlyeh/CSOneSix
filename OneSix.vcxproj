@@ -86,6 +86,7 @@
     <ClCompile Include="OpenGL32.cpp" />
     <ClCompile Include="SDK\parsemsg.cpp" />
     <ClCompile Include="SDK\util.cpp" />
+    <ClCompile Include="Sound.cpp" />
     <ClCompile Include="Studio.cpp" />
     <ClCompile Include="UserMessage.cpp" />
     <ClCompile Include="Utility.cpp" />
@@ -162,6 +163,7 @@
     <ClInclude Include="SDK\util_vector.h" />
     <ClInclude Include="SDK\weaponinfo.h" />
     <ClInclude Include="SDK\wrect.h" />
+    <ClInclude Include="Sound.h" />
     <ClInclude Include="Studio.h" />
     <ClInclude Include="UserMessage.h" />
     <ClInclude Include="Utility.h" />

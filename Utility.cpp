@@ -116,6 +116,30 @@ void UtilityHandler::GenerateModuleList()
 
 // ===================================================================================
 // Memory handling
+THREADENTRY32* UtilityHandler::GetProcessThread()
+{
+	HANDLE hSnapshot = CreateToolhelp32Snapshot(TH32CS_SNAPTHREAD, 0);
+
+	if (hSnapshot == INVALID_HANDLE_VALUE)
+		return 0;
+
+	static THREADENTRY32 te32; ZeroMemory(&te32, sizeof(te32));
+	te32.dwSize = sizeof(THREADENTRY32);
+
+	Thread32First(hSnapshot, &te32);
+	while (Thread32Next(hSnapshot, &te32))
+	{
+		if (te32.th32OwnerProcessID == GetCurrentProcessId() && te32.th32ThreadID != GetCurrentThreadId())
+		{
+			CloseHandle(hSnapshot);
+			return &te32;
+		}
+	}
+
+	CloseHandle(hSnapshot);
+	return 0;
+}
+
 DWORD UtilityHandler::CalcModuleOffset(DWORD Address)
 {
 	DWORD Base = 0;
