@@ -44,7 +44,7 @@ void Menu::DrawMenu(color_t color, color_t selection)
 	{
 		// Draw selection
 		if (i == MenuIndex)
-			Draw::FillRGBA(x + 1, y + StrH * i, w - 2, StrH, selection);
+			Draw::FillRGBA(x + 1, y + StrH * i + 1, w - 2, StrH - 2, selection);
 
 		// Entry to draw
 		menuentry_t* Entry = &MenuStorage[i];

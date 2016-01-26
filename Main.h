@@ -11,6 +11,7 @@
 #include <Psapi.h>
 #include <TlHelp32.h>
 #include <GL\GL.h>
+#include <gl\GLU.h>
 
 #include "SDK/wrect.h"
 #include "SDK/cl_dll.h"

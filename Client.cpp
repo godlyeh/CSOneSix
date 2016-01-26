@@ -17,20 +17,27 @@ void HUD_Redraw(float time, int intermission)
 {
 	g_oExport.HUD_Redraw(time, intermission);
 
+	// Do stuff inside IsConnected, else you may get crashes on server join / mapchange
 	if (EngineHelper::IsConnected())
 	{
 		Menu::DrawMenu(rgb(168, 0, 0, 225), rgb(255, 168, 0, 225));
 		HudMessage::Draw();
+
+		static Vector vTest;
+		if (GetAsyncKeyState(VK_NUMPAD0) & 1)
+			vTest = g_oEngine.GetLocalPlayer()->origin;
+
+		Vector vScreen;
+		if (EngineHelper::WorldToScreen(vTest, vScreen))
+			Draw::DrawString(true, true, vScreen, rgb(255, 0, 0), "Yay %.2f %.2f", vScreen[0], vScreen[1]);
+		Draw::DrawString(false, 400, 200, rgb(255, 0, 0), "0x%p", g_oEngine.pTriAPI->WorldToScreen);
 	}
 }
 
 int HUD_Key_Event(int down, int keynum, const char *pszCurrentBinding)
 {
 	if (down && Menu::HandleKeys(keynum))
-	{
-		Menu::MenuActive = !Menu::MenuActive;
 		return 0;
-	}
 
 	return g_oExport.HUD_Key_Event(down, keynum, pszCurrentBinding);
 }

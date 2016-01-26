@@ -12,6 +12,74 @@ net_api_t* g_pNetApi;
 client_sprite_t* g_pSpriteList;
 SCREENINFO g_ScreenInfo;
 HSPRITE* g_pSprite;
+ViewMatrix* g_pViewMatrix;
+// ===================================================================================
+
+
+// ===================================================================================
+// Engine helper
+
+// Client info
+bool EngineHelper::IsConnected()
+{
+	g_pNetApi->Status(&NetStatus);
+	return (NetStatus.connected != 0);
+}
+
+void EngineHelper::UpdateScreenInfo()
+{
+	g_ScreenInfo.iSize = sizeof(SCREENINFO);
+	g_oEngine.pfnGetScreenInfo(&g_ScreenInfo);
+}
+
+// Engine math
+bool EngineHelper::WorldToScreen(float* Origin, float* Out) // HLSDK: ScreenTransform
+{
+	Out[0] = g_pViewMatrix[0][0] * Origin[0] + g_pViewMatrix[1][0] * Origin[1] + g_pViewMatrix[2][0] * Origin[2] + g_pViewMatrix[3][0];
+	Out[1] = g_pViewMatrix[0][1] * Origin[0] + g_pViewMatrix[1][1] * Origin[1] + g_pViewMatrix[2][1] * Origin[2] + g_pViewMatrix[3][1];
+	Out[2] = g_pViewMatrix[0][3] * Origin[0] + g_pViewMatrix[1][3] * Origin[1] + g_pViewMatrix[2][3] * Origin[2] + g_pViewMatrix[3][3];
+
+	if (Out[2] != 0.0f)
+	{
+		float flTmp = 1.0f / Out[2];
+		Out[0] *= flTmp;
+		Out[1] *= flTmp;
+	}
+
+	if (Out[2] > 0.0f)
+	{
+		Out[0] = (Out[0] + 1.0f) * (g_ScreenInfo.iWidth / 2);
+		Out[1] = (-Out[1] + 1.0f) * (g_ScreenInfo.iHeight / 2);
+		return true;
+	}
+	return false;
+}
+
+// Init
+void EngineHelper::InitHUD()
+{
+	g_pNetApi = g_pEngine->pNetAPI;
+	dwHUDPointer = Utility->FindPattern("client.dll", "B9 ? ? ? ? E8 ? ? ? ? 85 C0 74 59");
+	g_pSpriteList = *(client_sprite_t**)(dwHUDPointer + 0xC); // HUD->m_pSpriteList
+	g_pSprite = *(HSPRITE**)(dwHUDPointer + 0x178); // HUD->m_rghSprites
+	UpdateScreenInfo();
+
+	Utility->DeleteLog("HUD.txt");
+	Utility->Log("HUD.txt", "HUD Pointer: 0x%p\n", dwHUDPointer);
+
+	Utility->Log("HUD.txt", "HUD Sprite List: 0x%p\n", g_pSpriteList);
+}
+
+void EngineHelper::Initialize()
+{
+	InitHUD();
+
+	strcpy_s(g_Local.LevelName, g_oEngine.pfnGetLevelName());
+
+	g_pViewMatrix = (ViewMatrix*)Utility->FindPattern("hw.dll", "8D BF ? ? ? ? C7 07 ? ? ? ?");
+	Utility->DeleteLog("Engine.txt");
+	Utility->Log("Engine.txt", "ViewMatrix: 0x%p\n", g_pViewMatrix);
+}
 // ===================================================================================
 
 

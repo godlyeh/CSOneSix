@@ -6,7 +6,7 @@
 
 // ===================================================================================
 // Hooked GL funcs
-void __stdcall Hooked_glBegin(GLenum mode)
+VOID APIENTRY Hooked_glBegin(GLenum mode)
 {
 	glBegin(mode);
 }

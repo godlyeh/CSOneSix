@@ -7,6 +7,7 @@ namespace Draw
 {
 	void DrawString(bool Center, int x, int y, color_t color, char* Text, ...);
 	void DrawString(bool Center, bool DrawBG, int x, int y, color_t color, char* Text, ...);
+	void DrawString(bool Center, bool DrawBG, float* Pos, color_t color, char* Text, ...);
 	int GetStringWidth(char* Text, ...);
 	int GetStringHeight();
 	void FillRGBA(int x, int y, int w, int h, color_t color);

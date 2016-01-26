@@ -19,6 +19,19 @@ void Draw::DrawString(bool Center, bool DrawBG, int x, int y, color_t color, cha
 	g_oEngine.pfnDrawConsoleString(x, y, szBuffer);
 }
 
+void Draw::DrawString(bool Center, bool DrawBG, float* Pos, color_t color, char* Text, ...)
+{
+	int x = (int)Pos[0];
+	int y = (int)Pos[1];
+
+	char szBuffer[1024];
+	GET_VA_ARGS(Text, szBuffer);
+	if (Center) x -= GetStringWidth(szBuffer) / 2;
+	if (DrawBG) FillRGBA(x - 2, y - 1, GetStringWidth(szBuffer) + 4, GetStringHeight() + 2, rgb(0, 0, 0, 128));
+	g_oEngine.pfnDrawSetTextColor(((float)color.r / 255.0f), ((float)color.g / 255.0f), ((float)color.b / 255.0f));
+	g_oEngine.pfnDrawConsoleString(x, y, szBuffer);
+}
+
 int Draw::GetStringWidth(char* Text, ...)
 {
 	int w, h;
