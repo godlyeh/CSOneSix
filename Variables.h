@@ -28,9 +28,11 @@ namespace Variable
 	void Initialize();
 	void Register(char* Name, eVariableType Type, void* pVariable, float Min, float Max);
 	variable_t* GetVariable(const char* Name);
-	variable_t* GetVariable(void* pVariable);
 	void Save(char* FileName);
 	void Load(char* FileName);
+
+	// Array
+	static std::vector<variable_t> VariableStorage;
 }
 
 // ===================================================================================

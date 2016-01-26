@@ -10,6 +10,7 @@ cl_enginefunc_t* g_pEngine;
 cl_enginefunc_t g_oEngine;
 net_api_t* g_pNetApi;
 client_sprite_t* g_pSpriteList;
+SCREENINFO g_ScreenInfo;
 HSPRITE* g_pSprite;
 // ===================================================================================
 

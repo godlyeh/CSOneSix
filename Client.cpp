@@ -19,8 +19,57 @@ void HUD_Redraw(float time, int intermission)
 
 	if (EngineHelper::IsConnected())
 	{
-		
+		Menu::DrawMenu(rgb(168, 0, 0, 225), rgb(255, 168, 0, 225));
+		HudMessage::Draw();
 	}
+}
+
+int HUD_Key_Event(int down, int keynum, const char *pszCurrentBinding)
+{
+	if (down && Menu::HandleKeys(keynum))
+	{
+		Menu::MenuActive = !Menu::MenuActive;
+		return 0;
+	}
+
+	return g_oExport.HUD_Key_Event(down, keynum, pszCurrentBinding);
+}
+// ===================================================================================
+
+
+// ===================================================================================
+// Map change & round start
+static char PreviousLevelName[MAX_PATH] = "\0";
+
+void AtMapChange()
+{
+	
+}
+
+void AtRoundStart()
+{
+	// Map change
+	strcpy_s(g_Local.LevelName, g_oEngine.pfnGetLevelName());
+	if (PreviousLevelName[0] == '\0') strcpy_s(PreviousLevelName, g_Local.LevelName);
+	if (_stricmp(g_Local.LevelName, PreviousLevelName))
+	{
+		AtMapChange();
+		strcpy_s(PreviousLevelName, g_Local.LevelName);
+	}
+
+	// Clear hud messages if size is getting big
+	if (HudMessage::HudMessageStorage.size() >= 10000)
+		HudMessage::Clear();
+
+	// Update screen info
+	EngineHelper::UpdateScreenInfo();
+
+	// Hud messages
+	if (g_Local.RoundsPlayed == 1)		HudMessage::Add("[NewRound] Currently played %i round.", g_Local.RoundsPlayed);
+	else								HudMessage::Add("[NewRound] Currently played %i rounds.", g_Local.RoundsPlayed);
+
+	// inc round counter
+	++g_Local.RoundsPlayed;
 }
 // ===================================================================================
 
@@ -38,6 +87,7 @@ void HookExportTable()
 	memcpy(&g_oExport, g_pExport, sizeof(export_t));
 
 	g_pExport->HUD_Redraw = HUD_Redraw;
+	g_pExport->HUD_Key_Event = HUD_Key_Event;
 }
 
 void UnhookExportTable()

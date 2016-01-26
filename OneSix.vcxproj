@@ -19,7 +19,7 @@
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
-    <CharacterSet>NotSet</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
@@ -81,9 +81,13 @@
     <ClCompile Include="Drawing.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Event.cpp" />
+    <ClCompile Include="Hooking.cpp" />
+    <ClCompile Include="HudMessage.cpp" />
     <ClCompile Include="KButton.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="OpenGL32.cpp" />
+    <ClCompile Include="PlayerInfo.cpp" />
     <ClCompile Include="SDK\parsemsg.cpp" />
     <ClCompile Include="SDK\util.cpp" />
     <ClCompile Include="Sound.cpp" />
@@ -100,9 +104,13 @@
     <ClInclude Include="Drawing.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Event.h" />
+    <ClInclude Include="Hooking.h" />
+    <ClInclude Include="HudMessage.h" />
     <ClInclude Include="KButton.h" />
     <ClInclude Include="Main.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="OpenGL32.h" />
+    <ClInclude Include="PlayerInfo.h" />
     <ClInclude Include="SDK\anorms.h" />
     <ClInclude Include="SDK\beamdef.h" />
     <ClInclude Include="SDK\cdll_dll.h" />
@@ -165,6 +173,7 @@
     <ClInclude Include="SDK\wrect.h" />
     <ClInclude Include="Sound.h" />
     <ClInclude Include="Studio.h" />
+    <ClInclude Include="Timer.h" />
     <ClInclude Include="UserMessage.h" />
     <ClInclude Include="Utility.h" />
     <ClInclude Include="Variables.h" />

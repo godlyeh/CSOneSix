@@ -6,8 +6,6 @@
 
 // ===================================================================================
 // Variable handlers
-std::vector<variable_t> VariableStorage;
-
 void Variable::Initialize()
 {
 	VariableStorage.clear();
@@ -47,15 +45,6 @@ variable_t* Variable::GetVariable(const char* Name)
 	return NULL;
 }
 
-variable_t* Variable::GetVariable(void* pVariable)
-{
-	for (int i = 0; i < (int)VariableStorage.size(); ++i)
-		if (pVariable == VariableStorage[i].pVariable)
-			return &VariableStorage[i];
-
-	return NULL;
-}
-
 void Variable::Save(char* FileName)
 {
 	char FilePath[MAX_PATH];
@@ -73,6 +62,7 @@ void Variable::Save(char* FileName)
 		if (i < (int)VariableStorage.size() - 1) File << std::endl;
 	}
 
+	HudMessage::Add("Saved variables to '%s'.", FileName);
 	File.close();
 }
 
@@ -123,6 +113,7 @@ void Variable::Load(char* FileName)
 		Utility->Log("Log.txt", "%s = %.2f %i\n", strVariable.c_str(), *(PFLOAT)pVar->pVariable, *(PINT)pVar->pVariable);
 	}
 
+	HudMessage::Add("Loaded variables from '%s'.", FileName);
 	File.close();
 }
 // ===================================================================================

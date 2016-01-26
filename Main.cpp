@@ -12,12 +12,13 @@ char g_szHackDir[MAX_PATH] = "\0";
 
 // ===================================================================================
 // Hook hack
-void Hook()
+void HookHack()
 {
-	Variable::Initialize();
 	Utility->GenerateModuleList();
 
 	HookEngineTable(); // Hook engine table first
+	Variable::Initialize();
+
 	HookStudioTable();
 	HookCommandList();
 	HookCVarList();
@@ -27,15 +28,19 @@ void Hook()
 	HookExportTable();
 	HookOpenGLTable();
 	//HookSound();
+
+	Hook::Apply();
 }
 // ===================================================================================
 
 
 // ===================================================================================
 // Unhook hack
-void Unhook()
+void UnhookHack()
 {
 	Variable::Save("Variables.cfg");
+
+	Hook::Remove();
 
 	UnhookEngineTable();
 	UnhookStudioTable();
@@ -43,9 +48,9 @@ void Unhook()
 	UnhookCVarList();
 	UnhookKeyBindings();
 	UnhookEventList();
-	UnhookUserMsgList();
+	//UnhookUserMsgList();
 	UnhookExportTable();
-	UnhookOpenGLTable();
+	//UnhookOpenGLTable();
 	//UnhookSound();
 }
 // ===================================================================================
@@ -62,14 +67,15 @@ BOOL WINAPI DllMain(HMODULE hModule, DWORD dwCallReason, LPVOID lpReserved)
 		*(strrchr(g_szHackDir, '\\') + 1) = '\0';
 
 		// Hook
-		Hook();
+		HookHack();
 
 		return TRUE;
 	}
 
 	if (dwCallReason == DLL_PROCESS_DETACH)
 	{
-		Unhook();
+		// Unhook hack
+		UnhookHack();
 	}
 
 	return FALSE;

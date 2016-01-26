@@ -43,9 +43,6 @@
     <ClCompile Include="ADE32.cpp">
       <Filter>Misc\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Drawing.cpp">
-      <Filter>Hack\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Engine.cpp">
       <Filter>Hack\Source Files</Filter>
     </ClCompile>
@@ -78,6 +75,21 @@
     </ClCompile>
     <ClCompile Include="Sound.cpp">
       <Filter>Hack\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Misc\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Drawing.cpp">
+      <Filter>Misc\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HudMessage.cpp">
+      <Filter>Hack\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Hooking.cpp">
+      <Filter>Misc\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerInfo.cpp">
+      <Filter>Misc\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -270,9 +282,6 @@
     <ClInclude Include="ADE32.h">
       <Filter>Misc\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Drawing.h">
-      <Filter>Hack\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Engine.h">
       <Filter>Hack\Header Files</Filter>
     </ClInclude>
@@ -305,6 +314,24 @@
     </ClInclude>
     <ClInclude Include="Sound.h">
       <Filter>Hack\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Misc\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Drawing.h">
+      <Filter>Misc\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HudMessage.h">
+      <Filter>Hack\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>Misc\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Hooking.h">
+      <Filter>Misc\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerInfo.h">
+      <Filter>Misc\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

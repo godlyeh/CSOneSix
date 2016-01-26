@@ -35,14 +35,14 @@ void HookOpenGLTable()
 		if (dwFunction < Base || dwFunction > Size)
 			continue;
 
-#define GL_HOOK_FUNC(name) { if (dwFunction == (DWORD)GetProcAddress(GetModuleHandle("OPENGL32.dll"), #name)) *(PDWORD)dwPtr = (DWORD)Hooked_##name; }
+#define GL_HOOK_FUNC(name) { if (dwFunction == (DWORD)GetProcAddress(GetModuleHandle("OPENGL32.dll"), #name)) HOOK(dwPtr, Hooked_##name);/**(PDWORD)dwPtr = (DWORD)Hooked_##name;*/ }
 							
 
 		GL_HOOK_FUNC(glBegin);
 	}
 }
 
-void UnhookOpenGLTable()
+/*void UnhookOpenGLTable()
 {
 	for (DWORD dwPtr = g_dwOpenGLPointer; dwPtr <= g_dwOpenGLPointer + 0xB44; ++dwPtr)
 	{
@@ -53,5 +53,5 @@ void UnhookOpenGLTable()
 
 		GL_UNHOOK_FUNC(glBegin);
 	}
-}
+}*/
 // ===================================================================================
