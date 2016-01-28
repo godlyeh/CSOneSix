@@ -14,6 +14,7 @@ void Variable::Initialize()
 #define REGISTER_FLOAT(var, min, max) Register(#var, eVariableType::VAR_FLOAT, &var, min, max);
 
 	REGISTER_INT(Name, 0, 1);
+	//REGISTER_INT(MaxHudMessages, 1, 10);
 	REGISTER_FLOAT(HeightCorrection, -25, 25);
 
 	Load("Variables.cfg");

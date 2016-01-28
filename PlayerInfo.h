@@ -1,18 +1,24 @@
 // ===================================================================================
 // Player infos
-class PlayerInfo
+class PlayerInfo // General player info
 {
 public:
-
+	int Index;
 };
 
-class LocalPlayer : PlayerInfo
+class LocalPlayer : PlayerInfo // Local info
 {
 public:
 	// Level info
 	int RoundsPlayed;
 	char LevelName[MAX_PATH];
+
+public:
+	void Reset();
+	void Update();
 };
+
+void InitializePlayerInfos();
 // ===================================================================================
 
 

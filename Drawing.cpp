@@ -48,6 +48,23 @@ int Draw::GetStringHeight()
 	return h;
 }
 
+void Draw::Line(int x1, int y1, int x2, int y2, color_t color, float lw)
+{
+	glDisable(GL_TEXTURE_2D);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glColor4ub(color.r, color.g, color.b, color.a);
+	glLineWidth(lw);
+
+	glBegin(GL_LINE_STRIP);
+		glVertex2i(x1, y1);
+		glVertex2i(x2, y2);
+	glEnd();
+
+	glEnable(GL_TEXTURE_2D);
+	glDisable(GL_BLEND);
+}
+
 void Draw::FillRGBA(int x, int y, int w, int h, color_t color)
 {
 	glDisable(GL_TEXTURE_2D);

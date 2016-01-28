@@ -12,12 +12,18 @@ void Menu::FillMenuArray()
 {
 	MenuStorage.clear();
 	static int ESP = 0;
+	static int HUD = 0;
 
 	if (RegisterEntry("ESP", &ESP))
 	{
 		RegisterEntry("Name", 1, NULL, mnuToggleModifier);
 		RegisterEntry("HeightCorrection", 0.5f, "Height Correction");
 	}
+
+	/*if (RegisterEntry("HUD", &HUD))
+	{
+		RegisterEntry("MaxHudMessages", 1, "Max Hud Messages");
+	}*/
 }
 
 void Menu::DrawMenu(color_t color, color_t selection)
@@ -81,7 +87,7 @@ void Menu::DrawMenu(color_t color, color_t selection)
 bool Menu::HandleKeys(int keynum)
 {
 	// Change menu active
-	if (keynum == K_INS || keynum == K_DEL)
+	if (keynum == K_INS)
 	{
 		MenuActive = !MenuActive;
 

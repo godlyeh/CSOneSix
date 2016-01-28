@@ -22,7 +22,7 @@ void HudMessage::Clear()
 
 void HudMessage::Draw()
 {
-	for (int i = 0; i < ((HudMessageStorage.size() < MAX_HUD_MESSAGE) ? (int)HudMessageStorage.size() : MAX_HUD_MESSAGE); ++i)
+	for (int i = 0; i < (((int)HudMessageStorage.size() < MAX_HUD_MESSAGE) ? (int)HudMessageStorage.size() : MAX_HUD_MESSAGE); ++i)
 	{
 		if (HudMessageStorage[i].Timeout.Running())
 		{

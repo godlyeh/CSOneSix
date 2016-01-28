@@ -91,6 +91,9 @@
     <ClCompile Include="PlayerInfo.cpp">
       <Filter>Misc\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Console.cpp">
+      <Filter>Misc\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SDK\anorms.h">
@@ -331,6 +334,9 @@
       <Filter>Misc\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PlayerInfo.h">
+      <Filter>Misc\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Console.h">
       <Filter>Misc\Header Files</Filter>
     </ClInclude>
   </ItemGroup>

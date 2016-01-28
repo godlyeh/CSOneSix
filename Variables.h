@@ -24,6 +24,9 @@ namespace Variable
 	static int Name = 1;
 	static float HeightCorrection = 0.2f;
 
+	// HUD
+	//static int MaxHudMessages = 5;
+
 	// Funcs
 	void Initialize();
 	void Register(char* Name, eVariableType Type, void* pVariable, float Min, float Max);

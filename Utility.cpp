@@ -20,6 +20,31 @@ void UtilityHandler::ReplaceString(char* Text, char* SearchText, char* TextToRep
 	while (strRet.find(SearchText) != -1) strRet.replace(strRet.find(SearchText), strlen(SearchText), TextToReplace);
 	strcpy_s(Text, strRet.size() + 1, strRet.c_str());
 }
+
+std::vector<std::string> &UtilityHandler::SplitString(const std::string &String, char c, std::vector<std::string> &Elements)
+{
+	std::stringstream StringStream(String);
+	std::string Element;
+	while (std::getline(StringStream, Element, c))
+		Elements.push_back(Element);
+	return Elements;
+}
+
+std::vector<std::string> UtilityHandler::SplitString(const std::string &String, char c)
+{
+	std::vector<std::string> Elements;
+	SplitString(String, c, Elements);
+	return Elements;
+}
+
+std::string UtilityHandler::GetStringArg(const std::string &String, int Arg)
+{
+	std::vector<std::string> ArgumentList = SplitString(String, ' ');
+	if (Arg >= (int)ArgumentList.size())
+		return NULL;
+
+	return ArgumentList[Arg];
+}
 // ===================================================================================
 
 

@@ -17,6 +17,9 @@ public:
 	// String handling
 	char *StringA(const char* Text, ...);
 	void ReplaceString(char* Text, char* SearchText, char* TextToReplace);
+	std::vector<std::string> &SplitString(const std::string &String, char c, std::vector<std::string> &Elements);
+	std::vector<std::string> SplitString(const std::string &String, char c);
+	std::string GetStringArg(const std::string &String, int Arg);
 
 	// File handling
 	bool FileExist(char* FileName);

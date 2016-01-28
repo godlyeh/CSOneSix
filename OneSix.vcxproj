@@ -77,6 +77,7 @@
     <ClCompile Include="ADE32.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="Command.cpp" />
+    <ClCompile Include="Console.cpp" />
     <ClCompile Include="CVar.cpp" />
     <ClCompile Include="Drawing.cpp" />
     <ClCompile Include="Engine.cpp" />
@@ -100,6 +101,7 @@
     <ClInclude Include="ADE32.h" />
     <ClInclude Include="Client.h" />
     <ClInclude Include="Command.h" />
+    <ClInclude Include="Console.h" />
     <ClInclude Include="CVar.h" />
     <ClInclude Include="Drawing.h" />
     <ClInclude Include="Engine.h" />

@@ -7,6 +7,7 @@
 #include <IOStream>
 #include <FStream>
 #include <String>
+#include <SStream>
 #include <Vector>
 #include <Psapi.h>
 #include <TlHelp32.h>
@@ -35,6 +36,7 @@
 
 #include "ADE32.h"
 #include "Drawing.h"
+#include "Console.h"
 #include "Hooking.h"
 #include "Variables.h"
 #include "Menu.h"

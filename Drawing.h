@@ -10,6 +10,7 @@ namespace Draw
 	void DrawString(bool Center, bool DrawBG, float* Pos, color_t color, char* Text, ...);
 	int GetStringWidth(char* Text, ...);
 	int GetStringHeight();
+	void Line(int x1, int y1, int x2, int y2, color_t color, float lw = 1.0f);
 	void FillRGBA(int x, int y, int w, int h, color_t color);
 	void LineRect(int x, int y, int w, int h, int lw, color_t color);
 	void DepthFrame(int x, int y, int w, int h);

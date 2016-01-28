@@ -20,24 +20,24 @@ void HUD_Redraw(float time, int intermission)
 	// Do stuff inside IsConnected, else you may get crashes on server join / mapchange
 	if (EngineHelper::IsConnected())
 	{
+		// Draw menu
 		Menu::DrawMenu(rgb(168, 0, 0, 225), rgb(255, 168, 0, 225));
-		HudMessage::Draw();
+		Console::DrawConsole(rgb(168, 0, 0, 225));
 
-		static Vector vTest;
-		if (GetAsyncKeyState(VK_NUMPAD0) & 1)
-			vTest = g_oEngine.GetLocalPlayer()->origin;
-
-		Vector vScreen;
-		if (EngineHelper::WorldToScreen(vTest, vScreen))
-			Draw::DrawString(true, true, vScreen, rgb(255, 0, 0), "Yay %.2f %.2f", vScreen[0], vScreen[1]);
-		Draw::DrawString(false, 400, 200, rgb(255, 0, 0), "0x%p", g_oEngine.pTriAPI->WorldToScreen);
-	}
+		// Draw hud messages (center bottom, max set to 5)
+		HudMessage::Draw();	}
 }
 
 int HUD_Key_Event(int down, int keynum, const char *pszCurrentBinding)
 {
+	// Handle menu keys
 	if (down && Menu::HandleKeys(keynum))
 		return 0;
+
+	// Handle console keys
+	if (down && Console::HandleKeys(keynum))
+		return 0;
+	//MessageBox(0, Utility->StringA("%i", keynum), 0, 0);
 
 	return g_oExport.HUD_Key_Event(down, keynum, pszCurrentBinding);
 }
@@ -50,13 +50,16 @@ static char PreviousLevelName[MAX_PATH] = "\0";
 
 void AtMapChange()
 {
-	
+	// Reset player info
+	g_Local.Reset();
 }
 
 void AtRoundStart()
 {
+	// Update necesarry player infos
+	g_Local.Update();
+
 	// Map change
-	strcpy_s(g_Local.LevelName, g_oEngine.pfnGetLevelName());
 	if (PreviousLevelName[0] == '\0') strcpy_s(PreviousLevelName, g_Local.LevelName);
 	if (_stricmp(g_Local.LevelName, PreviousLevelName))
 	{
