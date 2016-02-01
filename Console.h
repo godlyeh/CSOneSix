@@ -10,6 +10,9 @@ typedef struct
 	char Name[64];
 	void (__cdecl* Function)(std::string ConsoleCommand);
 }console_cmd_t;
+
+#define CON_ARG_INFINITE -1
+#define ADD_CON_CMD(name) Console::AddCommand(#name, ConFunc_##name);
 // ===================================================================================
 
 
@@ -23,12 +26,16 @@ namespace Console
 
 	// Funcs
 	void AddCommand(char* CommandName, void(__cdecl* Function)(std::string ConsoleCommand));
+	bool ShiftKeyHeld();
+	bool CapslockActive();
 	bool HandleKeys(int keynum);
+
+	void InitializeDefaultCommands();
 
 	void DrawConsole(color_t color);
 	void Add(const char* Text, ...);
 	void Parse(const std::string& Text);
-	void Error(const char* Usage = NULL);
+	void Error(const char* ErrorMsg, ...);
 
 	// Array
 	static std::vector<console_cmd_t> ConsoleCmdStorage;
@@ -85,17 +92,17 @@ static char g_pszConsoleKeys[256][16] =
 	"+", // 45
 	".", // 46
 	"-", // 47
-	"1", // 48
-	"2", // 49
-	"3", // 50
-	"4", // 51
-	"5", // 52
-	"6", // 53
-	"7", // 54
-	"8", // 55
-	"9", // 56
-	"0", // 57
-	"", // 58
+	"", // 48
+	"1", // 49
+	"2", // 50
+	"3", // 51
+	"4", // 52
+	"5", // 53
+	"6", // 54
+	"7", // 55
+	"8", // 56
+	"9", // 57
+	"0", // 58
 	"", // 59
 	"", // 60
 	"\\", // 61
@@ -345,17 +352,17 @@ static char g_pszConsoleShiftKeys[256][16] =
 	"?", // 45
 	":", // 46
 	"_", // 47
-	"!", // 48
-	"\"", // 49
-	"#", // 50
-	"¤", // 51
-	"%", // 52
-	"&", // 53
-	"/", // 54
-	"(", // 55
-	")", // 56
-	"=", // 57
-	"", // 58
+	"", // 48
+	"!", // 49
+	"""", // 50
+	"#", // 51
+	"¤", // 52
+	"%", // 53
+	"&", // 54
+	"/", // 55
+	"(", // 56
+	")", // 57
+	"=", // 58
 	"", // 59
 	"", // 60
 	"`", // 61

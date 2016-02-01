@@ -12,15 +12,10 @@ char g_szHackDir[MAX_PATH] = "\0";
 
 // ===================================================================================
 // Hook hack
-void ConsoleFunc(std::string ConsoleCommand)
-{
-	MessageBox(0, "Hey", 0, 0);
-}
-
 void HookHack()
 {
 	Utility->GenerateModuleList();
-	Console::AddCommand("setvar", ConsoleFunc);
+	Console::InitializeDefaultCommands();
 
 	HookEngineTable(); // Hook engine table first
 	Variable::Initialize();
