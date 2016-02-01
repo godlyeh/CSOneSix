@@ -48,6 +48,7 @@
 #include "Command.h"
 #include "CVar.h"
 #include "Engine.h"
+#include "ESP.h"
 #include "Event.h"
 #include "HudMessage.h"
 #include "KButton.h"

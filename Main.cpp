@@ -14,7 +14,7 @@ char g_szHackDir[MAX_PATH] = "\0";
 // Hook hack
 void HookHack()
 {
-	Utility->GenerateModuleList();
+	//Utility->GenerateModuleList();
 	Console::InitializeDefaultCommands();
 
 	HookEngineTable(); // Hook engine table first
@@ -40,7 +40,7 @@ void HookHack()
 // Unhook hack
 void UnhookHack()
 {
-	Variable::Save("Variables.cfg");
+	//Variable::Save("Variables.cfg");
 
 	Hook::Remove();
 

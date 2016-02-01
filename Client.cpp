@@ -20,12 +20,16 @@ void HUD_Redraw(float time, int intermission)
 	// Do stuff inside IsConnected, else you may get crashes on server join / mapchange
 	if (EngineHelper::IsConnected())
 	{
-		// Draw menu
+		// Draw ESP
+		//ESP::DrawESP();
+
+		// Draw menu and console
 		Menu::DrawMenu(rgb(168, 0, 0, 225), rgb(255, 168, 0, 225));
-		Console::DrawConsole(rgb(168, 0, 0, 225));
+		//Console::DrawConsole(rgb(168, 0, 0, 225));
 
 		// Draw hud messages (center bottom, max set to 5)
-		HudMessage::Draw();	}
+		HudMessage::Draw();
+	}
 }
 
 int HUD_Key_Event(int down, int keynum, const char *pszCurrentBinding)

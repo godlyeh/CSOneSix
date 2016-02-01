@@ -13,6 +13,9 @@ public:
 	int RoundsPlayed;
 	char LevelName[MAX_PATH];
 
+	// Entity info
+	int MaxEntity;
+
 public:
 	void Reset();
 	void Update();

@@ -81,6 +81,7 @@
     <ClCompile Include="CVar.cpp" />
     <ClCompile Include="Drawing.cpp" />
     <ClCompile Include="Engine.cpp" />
+    <ClCompile Include="ESP.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="Hooking.cpp" />
     <ClCompile Include="HudMessage.cpp" />
@@ -105,6 +106,7 @@
     <ClInclude Include="CVar.h" />
     <ClInclude Include="Drawing.h" />
     <ClInclude Include="Engine.h" />
+    <ClInclude Include="ESP.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="Hooking.h" />
     <ClInclude Include="HudMessage.h" />

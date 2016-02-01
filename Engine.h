@@ -22,6 +22,8 @@ namespace EngineHelper
 	// Client info
 	bool IsConnected();
 	void UpdateScreenInfo();
+	bool ValidEntity(int EntityID);
+	bool ValidPlayer(int PlayerID);
 
 	// Engine math
 	bool WorldToScreen(float* Origin, float* Out);

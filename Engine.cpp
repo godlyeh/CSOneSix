@@ -32,6 +32,46 @@ void EngineHelper::UpdateScreenInfo()
 	g_oEngine.pfnGetScreenInfo(&g_ScreenInfo);
 }
 
+bool EngineHelper::ValidEntity(int EntityID)
+{
+	cl_entity_t* pLocal = g_oEngine.GetLocalPlayer();
+	cl_entity_t* pEntity = g_oEngine.GetEntityByIndex(EntityID);
+
+	if (pLocal->curstate.messagenum < pEntity->curstate.messagenum)
+		return false;
+
+	return true;
+}
+
+bool EngineHelper::ValidPlayer(int PlayerID)
+{
+	if (PlayerID < 0 || PlayerID > MAX_CLIENTS)
+		return false;
+
+	cl_entity_t* pLocal = g_oEngine.GetLocalPlayer();
+	cl_entity_t* pEntity = g_oEngine.GetEntityByIndex(PlayerID);
+
+	if (pEntity == NULL)
+		return false;
+
+	if (ValidEntity(PlayerID) == false)
+		return false;
+
+	if (pEntity->player == FALSE)
+		return false;
+
+	if (pLocal->index == pEntity->index)
+		return false;
+
+	if (pEntity->curstate.solid != 3)
+		return false;
+
+	if (pLocal->curstate.solid != 3 && pLocal->curstate.iuser1 == 4 && pLocal->curstate.iuser2 == pEntity->index)
+		return false;
+
+	return true;
+}
+
 // Engine math
 bool EngineHelper::WorldToScreen(float* Origin, float* Out) // HLSDK: ScreenTransform
 {
