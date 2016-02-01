@@ -12,10 +12,12 @@ char g_szHackDir[MAX_PATH] = "\0";
 
 // ===================================================================================
 // Hook hack
+
 void HookHack()
 {
-	//Utility->GenerateModuleList();
 	Console::InitializeDefaultCommands();
+
+	Utility->GenerateModuleList();
 
 	HookEngineTable(); // Hook engine table first
 	Variable::Initialize();
