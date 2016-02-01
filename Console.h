@@ -23,6 +23,7 @@ namespace Console
 	// Variables
 	static bool ConsoleActive = false;
 	static std::string EditLine;
+	static int EditPos = 0;
 
 	// Funcs
 	void AddCommand(char* CommandName, void(__cdecl* Function)(std::string ConsoleCommand));

@@ -6,10 +6,10 @@
 
 // ===================================================================================
 // Variable handlers
-// Player ESP
 #define REG_INT(name) int Variable::##name
 #define REG_FLOAT(name) float Variable::##name
 
+// Player ESP
 REG_INT(Name) = 1;
 REG_INT(WeaponName) = 1;
 REG_INT(Distance) = 1;
@@ -24,6 +24,10 @@ REG_FLOAT(GroundHeightCorrection) = 0.0f;
 REG_INT(Hostage) = 1;
 REG_INT(DistanceEntity) = 1;
 REG_FLOAT(EntityHeightCorrection) = 0.0f;
+
+// Opengl
+REG_INT(Wallhack) = 0;
+REG_FLOAT(Wallhack_Transparency) = 60;
 
 void Variable::Initialize()
 {
@@ -47,6 +51,10 @@ void Variable::Initialize()
 	REGISTER_INT(Hostage, 0, 1);
 	REGISTER_INT(DistanceEntity, 0, 1);
 	REGISTER_FLOAT(EntityHeightCorrection, -25, 25);
+
+	// OpenGL
+	REGISTER_INT(Wallhack, 0, 3);
+	REGISTER_FLOAT(Wallhack_Transparency, 10, 100);
 
 	Load("Variables.cfg");
 	Save("Variables.cfg");

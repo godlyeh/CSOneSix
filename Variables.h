@@ -39,6 +39,10 @@ namespace Variable
 	REG_INTEX(DistanceEntity);
 	REG_FLOATEX(EntityHeightCorrection);
 
+	// OpenGL
+	REG_INTEX(Wallhack);
+	REG_FLOATEX(Wallhack_Transparency);
+
 	// HUD
 	//static int MaxHudMessages = 5;
 

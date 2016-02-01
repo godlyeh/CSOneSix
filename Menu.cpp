@@ -7,6 +7,7 @@
 // ===================================================================================
 // Menu handler
 char mnuToggleModifier[][32] = { "OFF", "ON" };
+char mnuWallhack[][32] = { "OFF", "XQZ", "ASUS" };
 
 void Menu::FillMenuArray()
 {
@@ -14,6 +15,7 @@ void Menu::FillMenuArray()
 	static int PLAYERESP = 0;
 	static int GROUNDESP = 0;
 	static int ENTITYESP = 0;
+	static int OPENGL = 0;
 
 	if (RegisterEntry("PLAYER ESP", &PLAYERESP))
 	{
@@ -37,6 +39,13 @@ void Menu::FillMenuArray()
 		RegisterEntry("Height Correction", &Variable::EntityHeightCorrection, 0.5f);
 	}
 
+	if (RegisterEntry("OPENGL", &OPENGL))
+	{
+		RegisterEntry("Wallhack", &Variable::Wallhack, 1, mnuWallhack);
+		if (Variable::Wallhack == 2)
+			RegisterEntry("Wall Transparency", &Variable::Wallhack_Transparency, 1, NULL, 2);
+	}
+
 	/*if (RegisterEntry("HUD", &HUD))
 	{
 		RegisterEntry("MaxHudMessages", 1, "Max Hud Messages");
@@ -56,7 +65,7 @@ void Menu::DrawMenu(color_t color, color_t selection)
 	int StrH = Draw::GetStringHeight() + 2;
 	int x = 25;
 	int y = 200;
-	int w = 280;
+	int w = 320;
 	int h = MenuStorage.size() * StrH;
 
 	// Draw menu

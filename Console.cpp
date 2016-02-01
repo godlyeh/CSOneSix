@@ -36,7 +36,7 @@ bool Console::HandleKeys(int keynum)
 	// Get key input
 	if (Console::ConsoleActive)
 	{
-#define HandleKey(a) { EditLine += a; return true; }
+#define HandleKey(a) { EditLine.insert(EditPos, a); EditPos += strlen(a); return true; }
 #define ShiftHeld ShiftKeyHeld()
 #define CapsLock CapslockActive()
 
@@ -44,12 +44,26 @@ bool Console::HandleKeys(int keynum)
 		{
 			Parse(EditLine);
 			EditLine.clear();
+			EditPos = 0;
 			return true;
 		}
 
 		if (keynum == K_BACKSPACE && EditLine.size() > 0) // Erase line
 		{
-			EditLine.erase(EditLine.size() - 1);
+			--EditPos;
+			EditLine.erase(EditPos, 1);
+			return true;
+		}
+
+		if (keynum == K_LEFTARROW && EditPos > 0)
+		{
+			--EditPos;
+			return true;
+		}
+
+		if (keynum == K_RIGHTARROW && EditPos < (int)EditLine.size())
+		{
+			++EditPos;
 			return true;
 		}
 
@@ -188,7 +202,7 @@ void Console::DrawConsole(color_t color)
 	if (BlinkTimer.Running())
 	{
 		if (FlipFlopBlink)
-			Draw::FillRGBA(x + 4 + Draw::GetStringWidth("> %s", EditLine.c_str()), y + h - StrH + 3, 1, StrH - 6, rgb(255, 255, 255));
+			Draw::FillRGBA(x + 1 + (EditPos > 0 ? Draw::GetStringWidth("> %s", EditLine.substr(0, EditPos).c_str()) : Draw::GetStringWidth("> ")), y + h - StrH + 3, 1, StrH - 6, rgb(255, 255, 255));
 	}
 	else
 	{

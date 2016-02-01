@@ -8,6 +8,43 @@
 // Hooked GL funcs
 VOID APIENTRY Hooked_glBegin(GLenum mode)
 {
+	cl_entity_t* pEntity = g_oStudio.GetCurrentEntity();
+
+	if (pEntity)
+	{
+		if (Variable::Wallhack == 1)
+		{
+			if (EngineHelper::ValidEntity(pEntity->index))
+				glDepthRange(0, 0.5);
+			else
+				glDepthRange(0, 1);
+		}
+
+		if (Variable::Wallhack == 2)
+		{
+			float CurrentColor[4];
+			GLboolean CurrentBlend = GL_FALSE;
+			glGetFloatv(GL_CURRENT_COLOR, CurrentColor);
+			glGetBooleanv(GL_BLEND, &CurrentBlend);
+
+			if (!EngineHelper::ValidEntity(pEntity->index))
+			{
+				glDisable(GL_DEPTH_TEST);
+				glEnable(GL_BLEND);
+				glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+				glColor4f(CurrentColor[0], CurrentColor[1], CurrentColor[2], Variable::Wallhack_Transparency / 100.0f);
+			}
+
+			if (mode == GL_QUADS && CurrentColor[0] == 1 && CurrentColor[1] == 1 && CurrentColor[2] == 1)
+			{
+				float texCoords[10];
+				glGetFloatv(GL_CURRENT_TEXTURE_COORDS, texCoords);
+				if (texCoords[6] > 512 || texCoords[7] > 512)
+					mode = GL_NONE;
+			}
+		}
+	}
+
 	glBegin(mode);
 }
 // ===================================================================================

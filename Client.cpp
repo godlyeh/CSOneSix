@@ -17,6 +17,12 @@ void CL_CreateMove(float frametime, usercmd_t* cmd, int active)
 {
 	g_oExport.CL_CreateMove(frametime, cmd, active);
 
+	if (Variable::Wallhack == 2)
+	{
+		glClearColor(0, 0, 0, 0);
+		glClear(GL_COLOR_BUFFER_BIT);
+	}
+
 	// Update Players
 	if (EngineHelper::IsConnected())
 	{
