@@ -88,14 +88,14 @@
     <ClCompile Include="Hooking.cpp">
       <Filter>Misc\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerInfo.cpp">
-      <Filter>Misc\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Console.cpp">
       <Filter>Misc\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ESP.cpp">
       <Filter>Hack\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityInfo.cpp">
+      <Filter>Misc\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -336,14 +336,14 @@
     <ClInclude Include="Hooking.h">
       <Filter>Misc\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerInfo.h">
-      <Filter>Misc\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Console.h">
       <Filter>Misc\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ESP.h">
       <Filter>Hack\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityInfo.h">
+      <Filter>Misc\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -41,7 +41,7 @@
 #include "Hooking.h"
 #include "Variables.h"
 #include "Menu.h"
-#include "PlayerInfo.h"
+#include "EntityInfo.h"
 #include "Timer.h"
 #include "Utility.h"
 
