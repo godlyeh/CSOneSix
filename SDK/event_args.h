@@ -47,4 +47,6 @@ typedef struct event_args_s
 	int		bparam2;
 } event_args_t;
 
+typedef int (*pfnEventHook)(event_args_t* args);
+
 #endif

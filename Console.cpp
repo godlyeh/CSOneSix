@@ -48,22 +48,26 @@ bool Console::HandleKeys(int keynum)
 			return true;
 		}
 
-		if (keynum == K_BACKSPACE && EditLine.size() > 0) // Erase line
+		if (keynum == K_BACKSPACE) // Erase line
 		{
-			--EditPos;
-			EditLine.erase(EditPos, 1);
+			if (EditLine.size() > 0)
+			{
+				--EditPos;
+				EditLine.erase(EditPos, 1);
+			}
+			
 			return true;
 		}
 
-		if (keynum == K_LEFTARROW && EditPos > 0)
+		if (keynum == K_LEFTARROW)
 		{
-			--EditPos;
+			if (EditPos > 0) --EditPos;
 			return true;
 		}
 
 		if (keynum == K_RIGHTARROW && EditPos < (int)EditLine.size())
 		{
-			++EditPos;
+			if (EditPos < (int)EditLine.size()) ++EditPos;
 			return true;
 		}
 
