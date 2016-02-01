@@ -81,7 +81,7 @@ void ESP::DrawWeapon(int EntityID)
 
 	// Weapon names on ground
 	if (Variable::WeaponGroundName && strlen(Entity->Weapon) > 0)
-		Draw::DrawString(true, true, vScreen, rgb(255, 255, 0), "%s", Entity->Weapon);
+		Draw::DrawString(true, true, vScreen, rgb(255, 255, 0), Entity->Weapon);
 }
 
 void ESP::DrawEntity(int EntityID)

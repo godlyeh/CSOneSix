@@ -97,6 +97,9 @@
     <ClCompile Include="EntityInfo.cpp">
       <Filter>Misc\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Radar.cpp">
+      <Filter>Hack\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SDK\anorms.h">
@@ -344,6 +347,9 @@
     </ClInclude>
     <ClInclude Include="EntityInfo.h">
       <Filter>Misc\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Radar.h">
+      <Filter>Hack\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

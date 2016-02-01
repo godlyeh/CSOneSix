@@ -90,6 +90,7 @@
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="OpenGL32.cpp" />
     <ClCompile Include="EntityInfo.cpp" />
+    <ClCompile Include="Radar.cpp" />
     <ClCompile Include="SDK\parsemsg.cpp" />
     <ClCompile Include="SDK\util.cpp" />
     <ClCompile Include="Sound.cpp" />
@@ -115,6 +116,7 @@
     <ClInclude Include="Menu.h" />
     <ClInclude Include="OpenGL32.h" />
     <ClInclude Include="EntityInfo.h" />
+    <ClInclude Include="Radar.h" />
     <ClInclude Include="SDK\anorms.h" />
     <ClInclude Include="SDK\beamdef.h" />
     <ClInclude Include="SDK\cdll_dll.h" />

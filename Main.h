@@ -54,6 +54,7 @@
 #include "HudMessage.h"
 #include "KButton.h"
 #include "OpenGL32.h"
+#include "Radar.h"
 #include "Sound.h"
 #include "Studio.h"
 #include "UserMessage.h"

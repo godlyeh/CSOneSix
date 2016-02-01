@@ -34,8 +34,8 @@ namespace Menu
 	void DrawMenu(color_t color, color_t selection);
 	bool HandleKeys(int keynum);
 	bool RegisterEntry(char* Name, int* pVariable, int SubItem = 0);
-	void RegisterEntry(char* Name, eEntryType Type, void* pVariable, float Step, float Min, float Max, char* CustomName = NULL, char* CustomValue[32] = NULL, int SubItem = 1);
-	void RegisterEntry(const char* pVariable, float Step, char* CustomName = NULL, char CustomValue[][32] = NULL, int SubItem = 1);
+	void RegisterEntry(char* Name, eEntryType Type, void* pVariable, float Step, float Min, float Max, char* CustomValue[32] = NULL, int SubItem = 1);
+	void RegisterEntry(char* Name, void* pVariable, float Step = 1, char CustomValue[][32] = NULL, int SubItem = 1);
 
 	// Array
 	static std::vector<menuentry_t> MenuStorage;

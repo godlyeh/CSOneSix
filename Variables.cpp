@@ -6,6 +6,25 @@
 
 // ===================================================================================
 // Variable handlers
+// Player ESP
+#define REG_INT(name) int Variable::##name
+#define REG_FLOAT(name) float Variable::##name
+
+REG_INT(Name) = 1;
+REG_INT(WeaponName) = 1;
+REG_INT(Distance) = 1;
+REG_FLOAT(PlayerHeightCorrection) = 0.0f;
+
+// Weapon ESP
+REG_INT(WeaponGroundName) = 1;
+REG_INT(DistanceGround) = 1;
+REG_FLOAT(GroundHeightCorrection) = 0.0f;
+
+// Entity ESP
+REG_INT(Hostage) = 1;
+REG_INT(DistanceEntity) = 1;
+REG_FLOAT(EntityHeightCorrection) = 0.0f;
+
 void Variable::Initialize()
 {
 	VariableStorage.clear();
@@ -53,6 +72,15 @@ variable_t* Variable::GetVariable(const char* Name)
 {
 	for (int i = 0; i < (int)VariableStorage.size(); ++i)
 		if (!_stricmp(Name, VariableStorage[i].Name))
+			return &VariableStorage[i];
+
+	return NULL;
+}
+
+variable_t* Variable::GetVariable(const void* pVariable)
+{
+	for (int i = 0; i < (int)VariableStorage.size(); ++i)
+		if (VariableStorage[i].pVariable == pVariable)
 			return &VariableStorage[i];
 
 	return NULL;

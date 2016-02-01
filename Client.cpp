@@ -70,7 +70,7 @@ static char PreviousLevelName[MAX_PATH] = "\0";
 
 void AtMapChange()
 {
-	// Reset player info
+	// Reset infos
 	g_Local.Reset();
 }
 

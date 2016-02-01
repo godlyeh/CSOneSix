@@ -20,21 +20,24 @@ typedef struct
 // Variable helper
 namespace Variable
 {
+#define REG_INTEX(name) extern int name
+#define REG_FLOATEX(name) extern float name
+
 	// Player ESP
-	static int Name = 1;
-	static int WeaponName = 1;
-	static int Distance = 1;
-	static float PlayerHeightCorrection = 0.0f;
+	REG_INTEX(Name);
+	REG_INTEX(WeaponName);
+	REG_INTEX(Distance);
+	REG_FLOATEX(PlayerHeightCorrection);
 
 	// Weapon ESP
-	static int WeaponGroundName = 1;
-	static int DistanceGround = 1;
-	static float GroundHeightCorrection = 0.0f;
+	REG_INTEX(WeaponGroundName);
+	REG_INTEX(DistanceGround);
+	REG_FLOATEX(GroundHeightCorrection);
 
 	// Entity ESP
-	static int Hostage = 1;
-	static int DistanceEntity = 1;
-	static float EntityHeightCorrection = 0.0f;
+	REG_INTEX(Hostage);
+	REG_INTEX(DistanceEntity);
+	REG_FLOATEX(EntityHeightCorrection);
 
 	// HUD
 	//static int MaxHudMessages = 5;
@@ -43,6 +46,7 @@ namespace Variable
 	void Initialize();
 	void Register(char* Name, eVariableType Type, void* pVariable, float Min, float Max);
 	variable_t* GetVariable(const char* Name);
+	variable_t* GetVariable(const void* pVariable);
 	void Save(char* FileName);
 	void Load(char* FileName);
 
