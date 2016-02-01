@@ -42,20 +42,17 @@ void HookHack()
 // Unhook hack
 void UnhookHack()
 {
-	//Variable::Save("Variables.cfg");
-
+	Variable::Save("Variables.cfg");
+	
 	Hook::Remove();
 
-	UnhookEngineTable();
 	UnhookStudioTable();
 	UnhookCommandList();
 	UnhookCVarList();
 	UnhookKeyBindings();
 	UnhookEventList();
-	//UnhookUserMsgList();
 	UnhookExportTable();
-	//UnhookOpenGLTable();
-	//UnhookSound();
+	UnhookEngineTable();
 }
 // ===================================================================================
 

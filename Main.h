@@ -33,6 +33,7 @@
 #include "SDK/util.h"
 #include "SDK/net_api.h"
 #include "SDK/keydefs.h"
+#include "SDK/mathlib.h"
 
 #include "ADE32.h"
 #include "Drawing.h"
@@ -48,6 +49,7 @@
 #include "Command.h"
 #include "CVar.h"
 #include "Engine.h"
+#include "ESP.h"
 #include "Event.h"
 #include "HudMessage.h"
 #include "KButton.h"

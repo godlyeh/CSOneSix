@@ -11,13 +11,30 @@ char mnuToggleModifier[][32] = { "OFF", "ON" };
 void Menu::FillMenuArray()
 {
 	MenuStorage.clear();
-	static int ESP = 0;
-	static int HUD = 0;
+	static int PLAYERESP = 0;
+	static int GROUNDESP = 0;
+	static int ENTITYESP = 0;
 
-	if (RegisterEntry("ESP", &ESP))
+	if (RegisterEntry("PLAYER ESP", &PLAYERESP))
 	{
 		RegisterEntry("Name", 1, NULL, mnuToggleModifier);
-		RegisterEntry("HeightCorrection", 0.5f, "Height Correction");
+		RegisterEntry("WeaponName", 1, "Weapon Name", mnuToggleModifier);
+		RegisterEntry("Distance", 1, NULL, mnuToggleModifier);
+		RegisterEntry("PlayerHeightCorrection", 0.5f, "Height Correction");
+	}
+	
+	if (RegisterEntry("GROUND ESP", &GROUNDESP))
+	{
+		RegisterEntry("WeaponGroundName", 1, "Weapon Name", mnuToggleModifier);
+		RegisterEntry("DistanceGround", 1, "Distance", mnuToggleModifier);
+		RegisterEntry("GroundHeightCorrection", 0.5f, "Height Correction");
+	}
+
+	if (RegisterEntry("ENTITY ESP", &ENTITYESP))
+	{
+		RegisterEntry("Hostage", 1, NULL, mnuToggleModifier);
+		RegisterEntry("DistanceEntity", 1, "Distance", mnuToggleModifier);
+		RegisterEntry("EntityHeightCorrection", 0.5f, "Height Correction");
 	}
 
 	/*if (RegisterEntry("HUD", &HUD))
@@ -183,12 +200,13 @@ bool Menu::RegisterEntry(char* Name, int* pVariable, int SubItem)
 	return *pVariable != 0;
 }
 
-void Menu::RegisterEntry(char* Name, eEntryType Type, void* pVariable, float Step, float Min, float Max, char* CustomValue[32], int SubItem)
+void Menu::RegisterEntry(char* Name, eEntryType Type, void* pVariable, float Step, float Min, float Max, char* CustomName, char* CustomValue[32], int SubItem)
 {
 	menuentry_t tmp; ZeroMemory(&tmp, sizeof(menuentry_t));
 
 	strcpy_s(tmp.Name, Name);
 	if (CustomValue != NULL && Type == eEntryType::ENTRY_INTEGER) tmp.Value = CustomValue[*(PINT)pVariable];
+	if (CustomName != NULL)	strcpy_s(tmp.Name, CustomName);
 	tmp.SubItem = SubItem;
 	tmp.IsVariable = true;
 	tmp.Type = Type;

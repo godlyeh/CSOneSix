@@ -13,9 +13,21 @@ void Variable::Initialize()
 #define REGISTER_INT(var, min, max) Register(#var, eVariableType::VAR_INTEGER, &var, min, max);
 #define REGISTER_FLOAT(var, min, max) Register(#var, eVariableType::VAR_FLOAT, &var, min, max);
 
+	// Player ESP
 	REGISTER_INT(Name, 0, 1);
-	//REGISTER_INT(MaxHudMessages, 1, 10);
-	REGISTER_FLOAT(HeightCorrection, -25, 25);
+	REGISTER_INT(WeaponName, 0, 1);
+	REGISTER_INT(Distance, 0, 1);
+	REGISTER_FLOAT(PlayerHeightCorrection, -25, 25);
+
+	// Weapon ESP
+	REGISTER_INT(WeaponGroundName, 0, 1);
+	REGISTER_INT(DistanceGround, 0, 1);
+	REGISTER_FLOAT(GroundHeightCorrection, -25, 25);
+
+	// Entity ESP
+	REGISTER_INT(Hostage, 0, 1);
+	REGISTER_INT(DistanceEntity, 0, 1);
+	REGISTER_FLOAT(EntityHeightCorrection, -25, 25);
 
 	Load("Variables.cfg");
 	Save("Variables.cfg");

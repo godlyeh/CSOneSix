@@ -94,6 +94,9 @@
     <ClCompile Include="Console.cpp">
       <Filter>Misc\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ESP.cpp">
+      <Filter>Hack\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SDK\anorms.h">
@@ -338,6 +341,9 @@
     </ClInclude>
     <ClInclude Include="Console.h">
       <Filter>Misc\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ESP.h">
+      <Filter>Hack\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

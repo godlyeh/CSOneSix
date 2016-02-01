@@ -13,6 +13,16 @@ export_t g_oExport;
 
 // ===================================================================================
 // Export functions
+void CL_CreateMove(float frametime, usercmd_t* cmd, int active)
+{
+	g_oExport.CL_CreateMove(frametime, cmd, active);
+
+	// Update Players
+	g_Local.Update();
+	for (int i = 0; i <= MAX_CLIENTS; ++i)
+		g_Player[i].UpdateInfo();
+}
+
 void HUD_Redraw(float time, int intermission)
 {
 	g_oExport.HUD_Redraw(time, intermission);
@@ -20,6 +30,9 @@ void HUD_Redraw(float time, int intermission)
 	// Do stuff inside IsConnected, else you may get crashes on server join / mapchange
 	if (EngineHelper::IsConnected())
 	{
+		// Draw ESP
+		ESP::DrawESP();
+
 		// Draw menu and console
 		Menu::DrawMenu(rgb(168, 0, 0, 225), rgb(255, 168, 0, 225));
 		Console::DrawConsole(rgb(168, 0, 0, 225));
@@ -97,6 +110,7 @@ void HookExportTable()
 	g_pExport = (export_t*)dwExportPointer;
 	memcpy(&g_oExport, g_pExport, sizeof(export_t));
 
+	g_pExport->CL_CreateMove = CL_CreateMove;
 	g_pExport->HUD_Redraw = HUD_Redraw;
 	g_pExport->HUD_Key_Event = HUD_Key_Event;
 }

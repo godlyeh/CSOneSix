@@ -20,9 +20,21 @@ typedef struct
 // Variable helper
 namespace Variable
 {
-	// ESP
+	// Player ESP
 	static int Name = 1;
-	static float HeightCorrection = 0.2f;
+	static int WeaponName = 1;
+	static int Distance = 1;
+	static float PlayerHeightCorrection = 0.0f;
+
+	// Weapon ESP
+	static int WeaponGroundName = 1;
+	static int DistanceGround = 1;
+	static float GroundHeightCorrection = 0.0f;
+
+	// Entity ESP
+	static int Hostage = 1;
+	static int DistanceEntity = 1;
+	static float EntityHeightCorrection = 0.0f;
 
 	// HUD
 	//static int MaxHudMessages = 5;

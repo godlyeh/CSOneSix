@@ -37,7 +37,10 @@ bool EngineHelper::ValidEntity(int EntityID)
 	cl_entity_t* pLocal = g_oEngine.GetLocalPlayer();
 	cl_entity_t* pEntity = g_oEngine.GetEntityByIndex(EntityID);
 
-	if (pLocal->curstate.messagenum < pEntity->curstate.messagenum)
+	if (!pLocal || !pEntity)
+		return false;
+
+	if (pEntity->curstate.messagenum < pLocal->curstate.messagenum)
 		return false;
 
 	return true;
@@ -48,14 +51,11 @@ bool EngineHelper::ValidPlayer(int PlayerID)
 	if (PlayerID < 0 || PlayerID > MAX_CLIENTS)
 		return false;
 
-	cl_entity_t* pLocal = g_oEngine.GetLocalPlayer();
-	cl_entity_t* pEntity = g_oEngine.GetEntityByIndex(PlayerID);
-
-	if (pEntity == NULL)
-		return false;
-
 	if (ValidEntity(PlayerID) == false)
 		return false;
+
+	cl_entity_t* pLocal = g_oEngine.GetLocalPlayer();
+	cl_entity_t* pEntity = g_oEngine.GetEntityByIndex(PlayerID);
 
 	if (pEntity->player == FALSE)
 		return false;
@@ -73,7 +73,7 @@ bool EngineHelper::ValidPlayer(int PlayerID)
 }
 
 // Engine math
-bool EngineHelper::WorldToScreen(float* Origin, float* Out) // HLSDK: ScreenTransform
+bool EngineHelper::WorldToScreen(float* Origin, float* Out)
 {
 	Out[0] = g_pViewMatrix[0][0] * Origin[0] + g_pViewMatrix[1][0] * Origin[1] + g_pViewMatrix[2][0] * Origin[2] + g_pViewMatrix[3][0];
 	Out[1] = g_pViewMatrix[0][1] * Origin[0] + g_pViewMatrix[1][1] * Origin[1] + g_pViewMatrix[2][1] * Origin[2] + g_pViewMatrix[3][1];

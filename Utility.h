@@ -48,7 +48,7 @@ extern UtilityHandler* Utility;
 // Defines
 #define GET_VA_ARGS(text, buffer) va_list valist; \
 								  va_start(valist, text); \
-								  _vsnprintf_s(buffer, MAX_PATH, text, valist); \
+								  _vsnprintf_s(buffer, 2048, text, valist); \
 							  	  va_end(valist);
 
 #define HACKDIR(filename) Utility->StringA("%s%s", g_szHackDir, filename)
