@@ -21,7 +21,8 @@ void PlayerInfo::UpdateInfo()
 	g_oEngine.pfnGetPlayerInfo(Index, &PlayerInfo);
 
 	// Info
-	strcpy_s(Name, PlayerInfo.name);
+	if (strlen(Name) > 0)
+		strcpy_s(Name, PlayerInfo.name);
 	Alive = pEntity->curstate.solid == 3;
 	Valid = EngineHelper::ValidPlayer(Index);
 

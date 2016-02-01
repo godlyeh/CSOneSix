@@ -18,9 +18,12 @@ void CL_CreateMove(float frametime, usercmd_t* cmd, int active)
 	g_oExport.CL_CreateMove(frametime, cmd, active);
 
 	// Update Players
-	g_Local.Update();
-	for (int i = 0; i <= MAX_CLIENTS; ++i)
-		g_Player[i].UpdateInfo();
+	if (EngineHelper::IsConnected())
+	{
+		g_Local.Update();
+		for (int i = 0; i <= MAX_CLIENTS; ++i)
+			g_Player[i].UpdateInfo();
+	}
 }
 
 void HUD_Redraw(float time, int intermission)
