@@ -25,9 +25,15 @@ public:
 	// Weapon
 	char Weapon[64];
 
+	// Frag info
+	int Frags;
+	int Deaths;
+	int Headshots; // only as accurate as when you enabled hack since its not stored anywhere
+
 	// Positions
 	Vector Angles;
 	Vector Origin;
+	Vector RadarCoord; // Team only
 	Vector Mins, Maxs;
 
 public:
@@ -44,7 +50,12 @@ private:
 class LocalPlayer : public EntityInfo // Local info
 {
 public:
-	// Level info
+	// Client info
+	int Health;
+	int Armor;
+	bool IsOnTrain;
+	int Money;
+	int RoundTime;
 	int RoundsPlayed;
 	char LevelName[MAX_PATH];
 

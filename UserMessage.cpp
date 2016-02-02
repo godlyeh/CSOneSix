@@ -231,6 +231,7 @@ int Hooked_RoundTime(const char *pszName, int iSize, void *pbuf)
 	// This message updates the round timer on the HUD. Time is in seconds.
 	BEGIN_READ(pbuf, iSize);
 	int Time = READ_SHORT();
+	g_Local.RoundTime = Time;
 
 	return oRoundTime(pszName, iSize, pbuf);
 }
@@ -252,6 +253,7 @@ int Hooked_Money(const char *pszName, int iSize, void *pbuf)
 	BEGIN_READ(pbuf, iSize);
 	int Amount = READ_LONG();
 	int Flag = READ_BYTE();
+	g_Local.Money = Amount;
 
 	return oMoney(pszName, iSize, pbuf);
 }
@@ -346,6 +348,13 @@ int Hooked_DeathMsg(const char *pszName, int iSize, void *pbuf)
 	int IsHeadshot = READ_BYTE();
 	char* TruncatedWeaponName = READ_STRING();
 
+	if (IsHeadshot)
+	{
+		++g_Player[KillerID].Headshots;
+		if (KillerID == g_Local.Index)
+			++g_Local.Headshots;
+	}
+
 	return oDeathMsg(pszName, iSize, pbuf);
 }
 
@@ -401,7 +410,8 @@ int Hooked_HudTextArgs(const char *pszName, int iSize, void *pbuf)
 	char* TextCode = READ_STRING();
 	int InitHUDstyle = READ_BYTE();
 	int NumberOfSubMessages = READ_BYTE();
-	//char* SubMsg1 = READ_STRING();
+	for (int i = 0; i < NumberOfSubMessages; ++i)
+		char* SubMessage = READ_STRING();
 
 	return oHudTextArgs(pszName, iSize, pbuf);
 }
@@ -474,6 +484,7 @@ int Hooked_Battery(const char *pszName, int iSize, void *pbuf)
 	// This message updates the icon and numerical armor value on the HUD.
 	BEGIN_READ(pbuf, iSize);
 	int Armor = READ_SHORT();
+	g_Local.Armor = Armor;
 
 	return oBattery(pszName, iSize, pbuf);
 }
@@ -487,6 +498,7 @@ int Hooked_Train(const char *pszName, int iSize, void *pbuf)
 	*/
 	BEGIN_READ(pbuf, iSize);
 	int Speed = READ_BYTE();
+	g_Local.IsOnTrain = Speed > 0;
 
 	return oTrain(pszName, iSize, pbuf);
 }
@@ -542,6 +554,7 @@ int Hooked_ReceiveW(const char *pszName, int iSize, void *pbuf)
 	*/
 	BEGIN_READ(pbuf, iSize);
 	int Mode = READ_BYTE();
+
 	return oReceiveW(pszName, iSize, pbuf);
 }
 
@@ -597,6 +610,7 @@ int Hooked_Radar(const char *pszName, int iSize, void *pbuf)
 	float CoordX = READ_COORD();
 	float CoordY = READ_COORD();
 	float CoordZ = READ_COORD();
+	g_Player[PlayerID].RadarCoord = Vector(CoordX, CoordY, CoordZ);
 
 	return oRadar(pszName, iSize, pbuf);
 }
@@ -626,6 +640,7 @@ int Hooked_Health(const char *pszName, int iSize, void *pbuf)
 	// This message updates the numerical health value on the HUD.
 	BEGIN_READ(pbuf, iSize);
 	int Health = READ_BYTE();
+	g_Local.Health = Health;
 
 	return oHealth(pszName, iSize, pbuf);
 }

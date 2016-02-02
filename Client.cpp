@@ -17,11 +17,11 @@ void CL_CreateMove(float frametime, usercmd_t* cmd, int active)
 {
 	g_oExport.CL_CreateMove(frametime, cmd, active);
 
-	if (Variable::Wallhack == 2)
+	/*if (Variable::Wallhack == 2)
 	{
 		glClearColor(0, 0, 0, 0);
 		glClear(GL_COLOR_BUFFER_BIT);
-	}
+	}*/
 
 	// Update Players
 	if (EngineHelper::IsConnected())
@@ -44,6 +44,8 @@ void HUD_Redraw(float time, int intermission)
 	{
 		// Draw ESP
 		ESP::DrawESP();
+
+		Draw::DrawString(false, 200, 200, rgb(255, 0, 0), "%i %i", g_Local.RoundTime, g_Local.Money);
 
 		// Draw menu and console
 		Menu::DrawMenu(rgb(168, 0, 0, 225), rgb(255, 168, 0, 225));
@@ -84,6 +86,16 @@ void AtRoundStart()
 {
 	// Update necesarry player infos
 	g_Local.Update();
+
+	// Reset player infos
+	if (g_Local.Frags == g_Local.Deaths == 0)
+		g_Local.Headshots = 0;
+
+	for (int i = 0; i <= MAX_CLIENTS; ++i)
+	{
+		if (g_Player[i].Frags == g_Player[i].Deaths == 0)
+			g_Player[i].Headshots = 0;
+	}
 
 	// Map change
 	if (PreviousLevelName[0] == '\0') strcpy_s(PreviousLevelName, g_Local.LevelName);
