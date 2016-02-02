@@ -27,12 +27,17 @@ VOID APIENTRY Hooked_glBegin(GLenum mode)
 			glGetFloatv(GL_CURRENT_COLOR, CurrentColor);
 			glGetBooleanv(GL_BLEND, &CurrentBlend);
 
-			if (!EngineHelper::ValidEntity(pEntity->index))
+			if (!(mode == GL_TRIANGLE_STRIP || mode == GL_TRIANGLE_FAN || mode == GL_QUADS))
 			{
 				glDisable(GL_DEPTH_TEST);
 				glEnable(GL_BLEND);
 				glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 				glColor4f(CurrentColor[0], CurrentColor[1], CurrentColor[2], Variable::Wallhack_Transparency / 100.0f);
+			}
+			else if ((mode == GL_TRIANGLES || mode == GL_TRIANGLE_STRIP || mode == GL_TRIANGLE_FAN) && pEntity && EngineHelper::ValidEntity(pEntity->index))
+			{
+				glEnable(GL_DEPTH_TEST);
+				glDisable(GL_BLEND);
 			}
 
 			if (mode == GL_QUADS && CurrentColor[0] == 1 && CurrentColor[1] == 1 && CurrentColor[2] == 1)
