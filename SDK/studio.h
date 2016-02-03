@@ -27,8 +27,6 @@ STUDIO MODELS
 Studio models are position independent, so the cache manager can move them.
 ==============================================================================
 */
-
-
 #define MAXSTUDIOTRIANGLES	20000	// TODO: tune this
 #define MAXSTUDIOVERTS		2048	// TODO: tune this
 #define MAXSTUDIOSEQUENCES	256		// total animation sequences
@@ -43,6 +41,8 @@ Studio models are position independent, so the cache manager can move them.
 #define MAXSTUDIOEVENTS		1024
 #define MAXSTUDIOPIVOTS		256
 #define MAXSTUDIOCONTROLLERS 8
+
+typedef float TransformMatrix[MAXSTUDIOBONES][3][4];
 
 typedef struct 
 {

@@ -21,6 +21,7 @@ void Menu::FillMenuArray()
 	{
 		RegisterEntry("Name", &Variable::Name, 1, mnuToggleModifier);
 		RegisterEntry("Weapon Name", &Variable::WeaponName, 1, mnuToggleModifier);
+		RegisterEntry("Player Actions", &Variable::Sequence, 1, mnuToggleModifier);
 		RegisterEntry("Distance", &Variable::Distance, 1, mnuToggleModifier);
 		RegisterEntry("Height Correction", &Variable::PlayerHeightCorrection, 0.5f);
 	}

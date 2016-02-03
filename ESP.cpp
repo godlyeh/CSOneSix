@@ -23,6 +23,28 @@ color_t ESP::GetTeamColor(int PlayerID)
 	return rgb(128, 128, 128);
 }
 
+std::string ESP::GetSequenceString(int PlayerID)
+{
+	int Sequence = Cstrike_SequenceInfo[g_Player[PlayerID].Sequence];
+	int GaitSequence = g_Player[PlayerID].GaitSequence;
+	static std::string strRet; strRet.clear();
+
+	if (GaitSequence == GAITSEQUENCE_STAND)			strRet = "[STANDING";
+	if (GaitSequence == GAITSEQUENCE_DUCK)			strRet = "[DUCKING";
+	if (GaitSequence == GAITSEQUENCE_WALK)			strRet = "[WALKING";
+	if (GaitSequence == GAITSEQUENCE_RUNNING)		strRet = "[RUNNING";
+	if (GaitSequence == GAITSEQUENCE_DUCKMOVE)		strRet = "[DUCKMOVING";
+	if (GaitSequence == GAITSEQUENCE_JUMP)			strRet = "[JUMPING";
+
+	if (Sequence &eSequence::SEQUENCE_SHOOT)		strRet += " + SHOOTING";
+	if (Sequence &eSequence::SEQUENCE_RELOAD)		strRet += " + RELOADING";
+	if (Sequence &eSequence::SEQUENCE_THROW)		strRet += " + THROWING";
+	if (Sequence &eSequence::SEQUENCE_ARM_C4)		strRet += " + ARMING C4";
+	if (Sequence &eSequence::SEQUENCE_SHIELD)		strRet += " + SHIELDED";
+
+	return strRet + "]";
+}
+
 void ESP::DrawPlayer(int PlayerID)
 {
 	EntityInfo* Player = &g_Player[PlayerID];
@@ -40,9 +62,10 @@ void ESP::DrawPlayer(int PlayerID)
 	if (EngineHelper::WorldToScreen(vOrigin, vScreen) == false)
 		return;
 
+	// YSTEP, automatically place text
 #define YSTEP vScreen[1] -= (Draw::GetStringHeight() + 2);
 	YSTEP;
-
+	
 	// Weapon
 	if (Variable::WeaponName)
 	{
@@ -54,6 +77,13 @@ void ESP::DrawPlayer(int PlayerID)
 	if (Variable::Name && Player->Name != NULL)
 	{
 		Draw::DrawString(true, true, vScreen, Color, Player->Name);
+		YSTEP;
+	}
+
+	// Sequence
+	if (Variable::Sequence)
+	{
+		Draw::DrawString(true, true, vScreen, Color, "%s", GetSequenceString(PlayerID).c_str());
 		YSTEP;
 	}
 

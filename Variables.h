@@ -27,6 +27,7 @@ namespace Variable
 	REG_INTEX(Name);
 	REG_INTEX(WeaponName);
 	REG_INTEX(Distance);
+	REG_INTEX(Sequence);
 	REG_FLOATEX(PlayerHeightCorrection);
 
 	// Weapon ESP

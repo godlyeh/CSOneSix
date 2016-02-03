@@ -10,12 +10,40 @@ VOID APIENTRY Hooked_glBegin(GLenum mode)
 {
 	cl_entity_t* pEntity = g_oStudio.GetCurrentEntity();
 
-	if (pEntity && Variable::Wallhack == 1)
+	if (pEntity)
 	{
-		if (EngineHelper::ValidEntity(pEntity->index))
-			glDepthRange(0, 0.5);
+		// Get bone matrix
+		if (!g_Player[pEntity->index].GotFirstBoneMatrix)
+		{
+			for (int i = 0; i < MAXSTUDIOBONES; ++i)
+			{
+				TransformMatrix* pBoneMatrix = (TransformMatrix*)g_oStudio.StudioGetBoneTransform();
+				g_Player[pEntity->index].BoneMatrix[i][0][3] = (*pBoneMatrix)[i][0][3];
+				g_Player[pEntity->index].BoneMatrix[i][1][3] = (*pBoneMatrix)[i][1][3];
+				g_Player[pEntity->index].BoneMatrix[i][2][3] = (*pBoneMatrix)[i][2][3];
+			}
+
+			g_Player[pEntity->index].GotFirstBoneMatrix = true;
+		}
 		else
-			glDepthRange(0, 1);
+		{
+			for (int i = 0; i < MAXSTUDIOBONES; ++i)
+			{
+				TransformMatrix* pBoneMatrix = (TransformMatrix*)g_oStudio.StudioGetBoneTransform();
+				g_Player[pEntity->index].BoneMatrix2[i][0][3] = (*pBoneMatrix)[i][0][3];
+				g_Player[pEntity->index].BoneMatrix2[i][1][3] = (*pBoneMatrix)[i][1][3];
+				g_Player[pEntity->index].BoneMatrix2[i][2][3] = (*pBoneMatrix)[i][2][3];
+			}
+		}
+
+		// Wallhack
+		if (Variable::Wallhack == 1)
+		{
+			if (EngineHelper::ValidEntity(pEntity->index))
+				glDepthRange(0, 0.5);
+			else
+				glDepthRange(0, 1);
+		}
 	}
 
 	glBegin(mode);

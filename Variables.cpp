@@ -13,6 +13,7 @@
 REG_INT(Name) = 1;
 REG_INT(WeaponName) = 1;
 REG_INT(Distance) = 1;
+REG_INT(Sequence) = 1;
 REG_FLOAT(PlayerHeightCorrection) = 0.0f;
 
 // Weapon ESP
@@ -40,6 +41,7 @@ void Variable::Initialize()
 	REGISTER_INT(Name, 0, 1);
 	REGISTER_INT(WeaponName, 0, 1);
 	REGISTER_INT(Distance, 0, 1);
+	REGISTER_INT(Sequence, 0, 1);
 	REGISTER_FLOAT(PlayerHeightCorrection, -25, 25);
 
 	// Weapon ESP

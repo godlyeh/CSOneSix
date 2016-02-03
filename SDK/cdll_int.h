@@ -37,6 +37,41 @@ typedef int HISPRITE;	// handle to a graphic
 #define SCRINFO_SCREENFLASH 1
 #define SCRINFO_STRETCHED	2
 
+static int Cstrike_SequenceInfo[] =
+{
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, // 0..9      
+	0, 1, 2, 0, 1, 2, 0, 1, 2, 0, // 10..19    
+	1, 2, 0, 1, 1, 2, 0, 1, 1, 2, // 20..29    
+	0, 1, 2, 0, 1, 2, 0, 1, 2, 0, // 30..39    
+	1, 2, 0, 1, 2, 0, 1, 2, 0, 1, // 40..49    
+	2, 0, 1, 2, 0, 0, 0, 8, 0, 8, // 50..59    
+	0, 16, 0, 16, 0, 0, 1, 1, 2, 0, // 60..69    
+	1, 1, 2, 0, 1, 0, 1, 0, 1, 2, // 70..79    
+	0, 1, 2, 32, 40, 32, 40, 32, 32, 32, // 80..89   
+	33, 64, 33, 34, 64, 65, 34, 32, 32, 4, // 90..99   
+	4, 4, 4, 4, 4, 4, 4, 4, 4, 4, // 100..109   
+	4                                       // 110   
+};
+
+enum eSequence : int
+{
+	SEQUENCE_IDLE = 0,
+	SEQUENCE_SHOOT = 1,
+	SEQUENCE_RELOAD = 2,
+	SEQUENCE_DIE = 4,
+	SEQUENCE_THROW = 8,
+	SEQUENCE_ARM_C4 = 16,
+	SEQUENCE_SHIELD = 32,
+	SEQUENCE_SHIELD_SIDE = 64
+};
+
+#define GAITSEQUENCE_STAND 1
+#define GAITSEQUENCE_DUCK 2
+#define GAITSEQUENCE_WALK 3
+#define GAITSEQUENCE_RUNNING 4
+#define GAITSEQUENCE_DUCKMOVE 5
+#define GAITSEQUENCE_JUMP 6
+
 typedef struct SCREENINFO_s
 {
 	int		iSize;

@@ -58,6 +58,7 @@
 #include "Sound.h"
 #include "Studio.h"
 #include "UserMessage.h"
+#include "WeaponList.h"
 // ===================================================================================
 
 

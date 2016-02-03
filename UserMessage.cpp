@@ -1016,6 +1016,14 @@ int Hooked_ScoreInfo(const char *pszName, int iSize, void *pbuf)
 	int ClassID = READ_SHORT();
 	int TeamID = READ_SHORT();
 
+	g_Player[PlayerID].Frags = Score;
+	g_Player[PlayerID].Deaths = Deaths;
+	if (g_Local.Index == PlayerID)
+	{
+		g_Local.Frags = Score;
+		g_Local.Deaths = Deaths;
+	}
+
 	return oScoreInfo(pszName, iSize, pbuf);
 }
 

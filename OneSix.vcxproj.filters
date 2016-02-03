@@ -100,6 +100,9 @@
     <ClCompile Include="Radar.cpp">
       <Filter>Hack\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="WeaponList.cpp">
+      <Filter>Hack\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SDK\anorms.h">
@@ -349,6 +352,9 @@
       <Filter>Misc\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Radar.h">
+      <Filter>Hack\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WeaponList.h">
       <Filter>Hack\Header Files</Filter>
     </ClInclude>
   </ItemGroup>

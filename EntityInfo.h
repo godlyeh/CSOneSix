@@ -1,10 +1,12 @@
 // ===================================================================================
 // Player infos
+#define MAX_TEAM_NAME 16
+
 typedef struct
 {
 	short TeamNumber; //0x0000 
-	char TeamName[10]; //0x0002 
-	char _0x000C[92];
+	char TeamName[MAX_TEAM_NAME]; //0x0002 
+	char _0x000C[86];
 }teaminfo_t;//Size=0x0068
 
 class EntityInfo // General entity info
@@ -17,6 +19,8 @@ public:
 	// Player info
 	bool Valid;
 	int Index;
+	int Sequence;
+	int GaitSequence;
 	teaminfo_t* Team;
 
 	// Entity info
@@ -35,6 +39,11 @@ public:
 	Vector Origin;
 	Vector RadarCoord; // Team only
 	Vector Mins, Maxs;
+
+	// Bone
+	bool GotFirstBoneMatrix;
+	TransformMatrix BoneMatrix;
+	TransformMatrix BoneMatrix2;
 
 public:
 	void UpdateInfo();

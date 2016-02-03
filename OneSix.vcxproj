@@ -98,6 +98,7 @@
     <ClCompile Include="UserMessage.cpp" />
     <ClCompile Include="Utility.cpp" />
     <ClCompile Include="Variables.cpp" />
+    <ClCompile Include="WeaponList.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ADE32.h" />
@@ -183,6 +184,7 @@
     <ClInclude Include="UserMessage.h" />
     <ClInclude Include="Utility.h" />
     <ClInclude Include="Variables.h" />
+    <ClInclude Include="WeaponList.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -12,6 +12,48 @@ engine_studio_api_t g_oStudio;
 
 
 // ===================================================================================
+// Studio helper
+mstudioseqdesc_t* StudioHelper::GetSequenceDescription(int PlayerID, int Sequence)
+{
+	cl_entity_t* pEntity = g_oEngine.GetEntityByIndex(PlayerID);
+	if (pEntity == NULL) return NULL;
+	studiohdr_t* pStudioHdr = (studiohdr_t*)g_oStudio.Mod_Extradata(pEntity->model);
+	if (!pStudioHdr) return NULL;
+	return &((mstudioseqdesc_t*)((byte*)pStudioHdr + pStudioHdr->seqindex))[Sequence];
+}
+
+mstudiobone_t* StudioHelper::GetStudioBone(int PlayerID, int BoneID)
+{
+	model_t* pModel = g_oStudio.SetupPlayerModel(PlayerID);
+	if (pModel == NULL) return NULL;
+	studiohdr_t* pStudioHdr = (studiohdr_t*)g_oStudio.Mod_Extradata(pModel);
+	if (!pStudioHdr) return NULL;
+	return &((mstudiobone_t*)((byte*)pStudioHdr + pStudioHdr->boneindex))[BoneID];
+}
+
+void StudioHelper::GetPlayerBone(int PlayerID, int BoneGroup, int BoneID, float* Out)
+{
+	Vector vBone;
+
+	if (BoneGroup)
+	{
+		vBone[0] = g_Player[PlayerID].BoneMatrix2[BoneID][0][3];
+		vBone[1] = g_Player[PlayerID].BoneMatrix2[BoneID][1][3];
+		vBone[2] = g_Player[PlayerID].BoneMatrix2[BoneID][2][3];
+		VectorCopy(vBone, Out);
+	}
+	else
+	{
+		vBone[0] = g_Player[PlayerID].BoneMatrix[BoneID][0][3];
+		vBone[1] = g_Player[PlayerID].BoneMatrix[BoneID][1][3];
+		vBone[2] = g_Player[PlayerID].BoneMatrix[BoneID][2][3];
+		VectorCopy(vBone, Out);
+	}
+}
+// ===================================================================================
+
+
+// ===================================================================================
 // Studio table hook
 void HookStudioTable()
 {

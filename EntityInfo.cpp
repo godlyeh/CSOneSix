@@ -65,6 +65,8 @@ void EntityInfo::UpdateInfo()
 	{
 		// Info
 		Valid = EngineHelper::ValidPlayer(Index);
+		Sequence = pEntity->curstate.sequence;
+		GaitSequence = pEntity->curstate.gaitsequence;
 		Team = GetPlayerTeam();
 		if (GetPlayerName() != NULL)
 			strcpy_s(Name, GetPlayerName());
