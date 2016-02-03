@@ -43,6 +43,9 @@ bool EngineHelper::ValidEntity(int EntityID)
 	if (pEntity->curstate.messagenum < pLocal->curstate.messagenum)
 		return false;
 
+	if (pEntity->curstate.solid != 1 && pEntity->curstate.solid != 3)
+		return false;
+
 	return true;
 }
 

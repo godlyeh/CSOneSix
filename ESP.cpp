@@ -23,6 +23,15 @@ color_t ESP::GetTeamColor(int PlayerID)
 	return rgb(128, 128, 128);
 }
 
+bool ESP::IsWeapon(int EntityID)
+{
+	cl_entity_t* pEntity = g_oEngine.GetEntityByIndex(EntityID);
+	if (pEntity && (strstr(pEntity->model->name, "models/w_") || strstr(pEntity->model->name, "models/p_")))
+		return true;
+
+	return false;
+}
+
 std::string ESP::GetSequenceString(int PlayerID)
 {
 	int Sequence = Cstrike_SequenceInfo[g_Player[PlayerID].Sequence];
@@ -102,6 +111,9 @@ void ESP::DrawWeapon(int EntityID)
 	if (Entity->Valid == false)
 		return;
 
+	if (IsWeapon(EntityID) == false)
+		return;
+
 	Vector vScreen, vOrigin = Entity->Origin;
 	vOrigin.z += Variable::GroundHeightCorrection;
 
@@ -109,9 +121,16 @@ void ESP::DrawWeapon(int EntityID)
 	if (EngineHelper::WorldToScreen(vOrigin, vScreen) == false)
 		return;
 
+	// YSTEP, automatically place text
+#define YSTEP vScreen[1] -= (Draw::GetStringHeight() + 2);
+	YSTEP;
+
 	// Weapon names on ground
 	if (Variable::WeaponGroundName && strlen(Entity->Weapon) > 0)
+	{
 		Draw::DrawString(true, true, vScreen, rgb(255, 255, 0), Entity->Weapon);
+		YSTEP;
+	}
 
 	// Distance
 	if (Variable::DistanceGround)
@@ -128,6 +147,9 @@ void ESP::DrawEntity(int EntityID)
 	if (Entity->Valid == false)
 		return;
 
+	if (IsWeapon(EntityID))
+		return;
+
 	Vector vScreen, vOrigin = Entity->Origin;
 	vOrigin.z += Variable::EntityHeightCorrection;
 
@@ -135,9 +157,16 @@ void ESP::DrawEntity(int EntityID)
 	if (EngineHelper::WorldToScreen(vOrigin, vScreen) == false)
 		return;
 
+	// YSTEP, automatically place text
+#define YSTEP vScreen[1] -= (Draw::GetStringHeight() + 2);
+	YSTEP;
+
 	// Hostage
 	if (Variable::Hostage && Entity->IsHostage)
+	{
 		Draw::DrawString(true, true, vScreen, rgb(255, 255, 0), "Hostage");
+		YSTEP;
+	}
 
 	// Distance
 	if (Variable::DistanceEntity)

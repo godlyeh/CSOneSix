@@ -28,6 +28,16 @@ char* EntityInfo::GetPlayerName()
 	return NULL;
 }
 
+char* EntityInfo::GetPlayerWeaponName(char* WeaponName)
+{
+	*(strrchr(WeaponName, '.')) = 0;
+
+	if (strstr(WeaponName, "shield"))
+		return Utility->StringA("shield + %s", strrchr(WeaponName, '/') + 3 + 7);
+
+	return strrchr(WeaponName, '/') + 3;
+}
+
 char* EntityInfo::GetWeaponName(char* WeaponName)
 {
 	*(strrchr(WeaponName, '.')) = 0;
@@ -73,10 +83,10 @@ void EntityInfo::UpdateInfo()
 
 		// Weapon
 		model_t* WeaponModel = g_oStudio.GetModelByIndex(pEntity->curstate.weaponmodel);
-		if (WeaponModel && WeaponModel->name && strstr(WeaponModel->name, "models/p_"))
+		if (WeaponModel && WeaponModel->name && (strstr(WeaponModel->name, "models/p_") || strstr(WeaponModel->name, "models/shield/p_")))
 		{
 			strcpy_s(Weapon, WeaponModel->name);
-			strcpy_s(Weapon, GetWeaponName(Weapon));
+			strcpy_s(Weapon, GetPlayerWeaponName(Weapon));
 		}
 	}
 	else

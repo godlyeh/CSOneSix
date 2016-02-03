@@ -45,7 +45,8 @@ void HUD_Redraw(float time, int intermission)
 		// Draw ESP
 		ESP::DrawESP();
 		
-		//Draw::DrawString(false, 200, 200, rgb(255, 0, 0), "%s", ESP::GetSequenceString(g_Local.Index).c_str());
+		//model_t* WeaponModel = g_oStudio.GetModelByIndex(g_oEngine.GetLocalPlayer()->curstate.weaponmodel);
+		//Draw::DrawString(false, 200, 200, rgb(255, 0, 0), "%s %s", WeaponModel->name, g_Local.Weapon);
 		
 		// Draw menu and console
 		Menu::DrawMenu(rgb(168, 0, 0, 225), rgb(255, 168, 0, 225));

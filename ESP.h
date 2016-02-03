@@ -3,8 +3,9 @@
 namespace ESP
 {
 	// Funcs
-	std::string GetSequenceString(int PlayerID);
 	color_t GetTeamColor(int PlayerID);
+	bool IsWeapon(int EntityID);
+	std::string GetSequenceString(int PlayerID);
 
 	void DrawPlayer(int PlayerID);
 	void DrawWeapon(int EntityID);

@@ -27,7 +27,7 @@ public:
 	bool IsHostage;
 
 	// Weapon
-	char Weapon[64];
+	char Weapon[128];
 
 	// Frag info
 	int Frags;
@@ -52,6 +52,7 @@ private:
 	DWORD dwGetPlayerName = 0;
 	DWORD dwGetPlayerTeam = 0;
 	char* GetPlayerName();
+	char* GetPlayerWeaponName(char* WeaponName);
 	char* GetWeaponName(char* WeaponName);
 	teaminfo_t* GetPlayerTeam();
 };
