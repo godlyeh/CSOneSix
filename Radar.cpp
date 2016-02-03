@@ -6,11 +6,5 @@
 
 // ===================================================================================
 // Radar handler
-void Radar::DrawRadar(int x, int y, int Size, color_t color)
-{
-	//if (!Variable::Radar)
-	//	return;
 
-	Draw::DrawWindow("Radar", x, y, Size, Size, color);
-}
 // ===================================================================================
