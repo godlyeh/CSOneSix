@@ -17,7 +17,9 @@ public:
 	bool Alive;
 
 	// Player info
+	bool IsPlayer;
 	bool Valid;
+	bool Ducking;
 	int Index;
 	int Sequence;
 	int GaitSequence;

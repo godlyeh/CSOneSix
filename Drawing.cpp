@@ -119,6 +119,71 @@ void Draw::DrawWindow(char* Title, int x, int y, int w, int h, color_t color)
 	DepthFrame(x, y, w, h);
 }
 
+void Draw::DrawVectorLine(float *flSrc, float *flDestination, int lw, color_t color)
+{
+	Vector vScreenSrc, vScreenDest;
+	if (!EngineHelper::WorldToScreen(flSrc, vScreenSrc) || !EngineHelper::WorldToScreen(flDestination, vScreenDest))
+		return;
+
+	Line((int)vScreenSrc[0], (int)vScreenSrc[1], (int)vScreenDest[0], (int)vScreenDest[1], color, (float)lw);
+}
+
+void Draw::Draw3DBox(bool bIsPlayer, Vector vOrigin, Vector vMins, Vector vMaxs, float *flAngles, int lw, color_t color)
+{
+	Vector vF, vR, vU;
+	EngineHelper::AngleVectors(flAngles, vF, vR, vU);
+
+	float flForward = vMaxs.y;
+	float flBack = vMins.y;
+	float flRight = vMaxs.x;
+	float flLeft = vMins.x;
+	float flUp = vMaxs.z;
+	float flDown = vMins.z;
+
+	if (bIsPlayer)
+	{
+		flForward += 15.0f;
+		flBack -= 5.0f;
+		flRight += 5.0f;
+		flLeft -= 5.0f;
+		flUp -= 5.0f;
+		flDown -= 2.0f;
+	}
+
+	Vector vUFLeft = vOrigin + vU * flUp + vF * flForward + vR * flLeft; // vUFLeft = Top left front
+	Vector vUFRight = vOrigin + vU * flUp + vF * flForward + vR * flRight; // vUFRight = Top right front
+	Vector vUBLeft = vOrigin + vU * flUp + vF * flBack + vR * flLeft; // vUBLeft = Top left back
+	Vector vUBRight = vOrigin + vU * flUp + vF * flBack + vR * flRight; // vUBRight = Top right back
+
+	Vector vBFLeft = vOrigin + vU * flDown + vF * flForward + vR * flLeft; // vBFLeft = Bottom left front
+	Vector vBFRight = vOrigin + vU * flDown + vF * flForward + vR * flRight; // vBFRight = Bottom right front
+	Vector vBBLeft = vOrigin + vU * flDown + vF * flBack + vR * flLeft; // vBBLeft = Bottom left back
+	Vector vBBRight = vOrigin + vU * flDown + vF * flBack + vR * flRight; // vBBRight = Bottom right back
+
+	//Top Box
+	DrawVectorLine(vUBLeft, vUBRight, lw, color); // Back left -> Back right
+	DrawVectorLine(vUBRight, vUFRight, lw, color); // Back right -> Front right
+	DrawVectorLine(vUFRight, vUFLeft, lw, color); // Front right -> Front left
+	DrawVectorLine(vUFLeft, vUBLeft, lw, color); // Front left -> Back right
+
+	//Mid Box
+	DrawVectorLine(vUBLeft, vBBLeft, lw, color); // Top left -> Bottom left
+	DrawVectorLine(vUBRight, vBBRight, lw, color); // Top right -> Bottom right
+	DrawVectorLine(vUFRight, vBFRight, lw, color); // Top right -> Bottom right
+	DrawVectorLine(vUFLeft, vBFLeft, lw, color); // Top left -> Bottom left
+
+	//Bottom Box
+	DrawVectorLine(vBBLeft, vBBRight, lw, color); // Back left -> Back right
+	DrawVectorLine(vBBRight, vBFRight, lw, color); // Back right -> Front right
+	DrawVectorLine(vBFRight, vBFLeft, lw, color); // Front right -> Front left
+	DrawVectorLine(vBFLeft, vBBLeft, lw, color); // Front left -> Back right
+}
+
+void Draw::Draw3DBox(int EntityID, int lw, color_t color)
+{
+	Draw3DBox(g_Entity[EntityID].IsPlayer, g_Entity[EntityID].Origin, g_Entity[EntityID].Mins, g_Entity[EntityID].Maxs, Vector(0.0f, g_Entity[EntityID].Angles.y, 0.0f), lw, color);
+}
+
 color_t rgb(int r, int g, int b)
 {
 	color_t clrRet = { r, g, b, 255 };

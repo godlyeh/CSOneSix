@@ -103,6 +103,9 @@
     <ClCompile Include="WeaponList.cpp">
       <Filter>Hack\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Aimbot.cpp">
+      <Filter>Hack\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SDK\anorms.h">
@@ -355,6 +358,9 @@
       <Filter>Hack\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="WeaponList.h">
+      <Filter>Hack\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Aimbot.h">
       <Filter>Hack\Header Files</Filter>
     </ClInclude>
   </ItemGroup>

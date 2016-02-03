@@ -63,6 +63,7 @@ void EntityInfo::UpdateInfo()
 	if (!pEntity) return;
 
 	// Info
+	IsPlayer = pEntity->player == 1;
 	Alive = pEntity->curstate.solid == 3;
 
 	// Entity info
@@ -75,6 +76,7 @@ void EntityInfo::UpdateInfo()
 	{
 		// Info
 		Valid = EngineHelper::ValidPlayer(Index);
+		Ducking = pEntity->curstate.usehull == 1;
 		Sequence = pEntity->curstate.sequence;
 		GaitSequence = pEntity->curstate.gaitsequence;
 		Team = GetPlayerTeam();
@@ -87,6 +89,7 @@ void EntityInfo::UpdateInfo()
 		{
 			strcpy_s(Weapon, WeaponModel->name);
 			strcpy_s(Weapon, GetPlayerWeaponName(Weapon));
+			_strupr_s(Weapon);
 		}
 	}
 	else
@@ -99,6 +102,7 @@ void EntityInfo::UpdateInfo()
 		{
 			strcpy_s(Weapon, pEntity->model->name);
 			strcpy_s(Weapon, GetWeaponName(Weapon));
+			_strupr_s(Weapon);
 		}
 	}
 

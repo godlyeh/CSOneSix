@@ -78,7 +78,7 @@ void ESP::DrawPlayer(int PlayerID)
 	// Weapon
 	if (Variable::WeaponName)
 	{
-		Draw::DrawString(true, true, vScreen, Color, Player->Weapon);
+		Draw::DrawString(true, true, vScreen, rgb(255, 255, 0), Player->Weapon);
 		YSTEP;
 	}
 
@@ -92,7 +92,7 @@ void ESP::DrawPlayer(int PlayerID)
 	// Sequence
 	if (Variable::Sequence)
 	{
-		Draw::DrawString(true, true, vScreen, Color, "%s", GetSequenceString(PlayerID).c_str());
+		Draw::DrawString(true, true, vScreen, rgb(255, 255, 255), "%s", GetSequenceString(PlayerID).c_str());
 		YSTEP;
 	}
 
@@ -101,6 +101,20 @@ void ESP::DrawPlayer(int PlayerID)
 	{
 		Draw::DrawString(true, true, vScreen, Color, "%.0fm", VectorDistance(g_Local.Origin, Player->Origin) / 22.0f);
 		YSTEP;
+	}
+
+	// Box
+	if (Variable::Box)
+	{
+		Draw::Draw3DBox(PlayerID, 2, Color);
+	}
+
+	// Aim Draw
+	if (Variable::AimDrawPosition)
+	{
+		Aimbot::GetAimVector(PlayerID, vOrigin);
+		if (EngineHelper::WorldToScreen(vOrigin, vScreen))
+			Draw::FillRGBA((int)vScreen.x, (int)vScreen.y, 2, 2, rgb(128, 0, 0));
 	}
 }
 

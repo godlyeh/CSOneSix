@@ -45,6 +45,7 @@
 #include "Timer.h"
 #include "Utility.h"
 
+#include "Aimbot.h"
 #include "Client.h"
 #include "Command.h"
 #include "CVar.h"

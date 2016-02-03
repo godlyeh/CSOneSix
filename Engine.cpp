@@ -98,6 +98,60 @@ bool EngineHelper::WorldToScreen(float* Origin, float* Out)
 	return false;
 }
 
+void EngineHelper::AngleVectors(float *flAngles, float *flForward, float *flRight, float *flUp)
+{
+	float v16 = (float)sin(flAngles[0] * (M_PI / 180));
+	float v15 = (float)cos(flAngles[0] * (M_PI / 180));
+
+	float v12 = (float)sin(flAngles[1] * (M_PI / 180));
+	float v13 = (float)cos(flAngles[1] * (M_PI / 180));
+
+	float v11 = (float)sin(flAngles[2] * (M_PI / 180));
+	float v14 = (float)cos(flAngles[2] * (M_PI / 180));
+
+	if (flForward)
+	{
+		flForward[0] = v15 * v13;
+		flForward[1] = v15 * v12;
+		flForward[2] = -v16;
+	}
+	if (flRight)
+	{
+		float v8 = v11 * v16;
+		flRight[0] = v14 * v12 - v8 * v13;
+		flRight[1] = (v8 * v12 + v14 * v13) * -1.0f;
+		flRight[2] = v11 * v15 * -1.0f;
+	}
+	if (flUp)
+	{
+		float v10 = v14 * v16;
+		flUp[0] = v10 * v13 + v11 * v12;
+		flUp[1] = v10 * v12 - v11 * v13;
+		flUp[2] = v14 * v15;
+	}
+}
+
+void EngineHelper::VectorAngles(const float *flForward, float *flAngles)
+{
+	double tmp, yaw, pitch;
+	if (flForward[1] == 0 && flForward[0] == 0)
+	{
+		if (flForward[2]>0)
+			pitch = 90.0;
+		else
+			pitch = 270.0;
+	}
+	else
+		yaw = (double)(atan2(flForward[1], flForward[0])*180.0 / M_PI);
+	if (yaw<0)
+		yaw += 360.0;
+	tmp = (double)sqrt(flForward[0] * flForward[0] + flForward[1] * flForward[1]);
+	pitch = (double)(atan2(flForward[2], (float)tmp)*180.0 / M_PI);
+	flAngles[0] = (float)pitch;
+	flAngles[1] = (float)yaw;
+	flAngles[2] = 0;
+}
+
 // Init
 void EngineHelper::InitHUD()
 {

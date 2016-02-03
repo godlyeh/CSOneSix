@@ -50,7 +50,7 @@ bool Console::HandleKeys(int keynum)
 
 		if (keynum == K_BACKSPACE) // Erase line
 		{
-			if (EditLine.size() > 0)
+			if (EditLine.size() > 0 && EditPos > 0)
 			{
 				--EditPos;
 				EditLine.erase(EditPos, 1);

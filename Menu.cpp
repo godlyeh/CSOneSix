@@ -7,15 +7,28 @@
 // ===================================================================================
 // Menu handler
 char mnuToggleModifier[][32] = { "OFF", "ON" };
+
+char mnuAimPosition[][32] = { "HEAD", "NECK", "CHEST", "STOMACH" };
+
+char mnuBoxESP[][32] = { "OFF", "3D", "NORMAL" };
+
 char mnuWallhack[][32] = { "OFF", "XQZ", "ASUS" };
 
 void Menu::FillMenuArray()
 {
 	MenuStorage.clear();
+	static int AIMBOT = 0;
 	static int PLAYERESP = 0;
 	static int GROUNDESP = 0;
 	static int ENTITYESP = 0;
 	static int OPENGL = 0;
+
+	if (RegisterEntry("AIMBOT", &AIMBOT))
+	{
+		RegisterEntry("Aimbot", &Variable::Aimbot, 1, mnuToggleModifier);
+		RegisterEntry("Position", &Variable::AimPosition, 1, mnuAimPosition);
+		RegisterEntry("Draw Position", &Variable::AimDrawPosition, 1, mnuToggleModifier);
+	}
 
 	if (RegisterEntry("PLAYER ESP", &PLAYERESP))
 	{
@@ -23,6 +36,13 @@ void Menu::FillMenuArray()
 		RegisterEntry("Weapon Name", &Variable::WeaponName, 1, mnuToggleModifier);
 		RegisterEntry("Player Actions", &Variable::Sequence, 1, mnuToggleModifier);
 		RegisterEntry("Distance", &Variable::Distance, 1, mnuToggleModifier);
+		RegisterEntry("Draw Aim Position", &Variable::AimDrawPosition, 1, mnuToggleModifier);
+		RegisterEntry("Box", &Variable::Box, 1, mnuBoxESP);
+		if (Variable::Box == 2)
+		{
+			RegisterEntry("Width", &Variable::Box_Width, 1, NULL, 2);
+			RegisterEntry("Height", &Variable::Box_Height, 1, NULL, 2);
+		}
 		RegisterEntry("Height Correction", &Variable::PlayerHeightCorrection, 0.5f);
 	}
 	

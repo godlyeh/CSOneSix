@@ -30,7 +30,7 @@ void CL_CreateMove(float frametime, usercmd_t* cmd, int active)
 		for (int i = 0; i <= MAX_CLIENTS; ++i)
 			g_Player[i].UpdateInfo();
 
-		for (int i = MAX_CLIENTS; i < g_Local.EntityCount; ++i)
+		for (int i = 0; i < g_Local.EntityCount; ++i)
 			g_Entity[i].UpdateInfo();
 	}
 }

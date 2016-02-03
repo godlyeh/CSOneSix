@@ -75,6 +75,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ADE32.cpp" />
+    <ClCompile Include="Aimbot.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="Console.cpp" />
@@ -102,6 +103,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ADE32.h" />
+    <ClInclude Include="Aimbot.h" />
     <ClInclude Include="Client.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="Console.h" />

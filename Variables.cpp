@@ -9,11 +9,19 @@
 #define REG_INT(name) int Variable::##name
 #define REG_FLOAT(name) float Variable::##name
 
+// Aimbot
+REG_INT(Aimbot) = 1;
+REG_INT(AimPosition) = 0;
+REG_INT(AimDrawPosition) = 1;
+
 // Player ESP
 REG_INT(Name) = 1;
 REG_INT(WeaponName) = 1;
 REG_INT(Distance) = 1;
 REG_INT(Sequence) = 1;
+REG_INT(Box) = 1;
+REG_INT(Box_Width) = 10;
+REG_INT(Box_Height) = 25;
 REG_FLOAT(PlayerHeightCorrection) = 0.0f;
 
 // Weapon ESP
@@ -37,11 +45,19 @@ void Variable::Initialize()
 #define REGISTER_INT(var, min, max) Register(#var, eVariableType::VAR_INTEGER, &var, min, max);
 #define REGISTER_FLOAT(var, min, max) Register(#var, eVariableType::VAR_FLOAT, &var, min, max);
 
+	// Aimbot
+	REGISTER_INT(Aimbot, 0, 1);
+	REGISTER_INT(AimPosition, 0, 3);
+	REGISTER_INT(AimDrawPosition, 0, 1);
+
 	// Player ESP
 	REGISTER_INT(Name, 0, 1);
 	REGISTER_INT(WeaponName, 0, 1);
 	REGISTER_INT(Distance, 0, 1);
 	REGISTER_INT(Sequence, 0, 1);
+	REGISTER_INT(Box, 0, 1);
+	REGISTER_INT(Box_Width, 2, 40);
+	REGISTER_INT(Box_Height, 2, 40);
 	REGISTER_FLOAT(PlayerHeightCorrection, -25, 25);
 
 	// Weapon ESP
@@ -55,7 +71,7 @@ void Variable::Initialize()
 	REGISTER_FLOAT(EntityHeightCorrection, -25, 25);
 
 	// OpenGL
-	REGISTER_INT(Wallhack, 0, 3);
+	REGISTER_INT(Wallhack, 0, 1);
 	REGISTER_FLOAT(Wallhack_Transparency, 10, 100);
 
 	Load("Variables.cfg");

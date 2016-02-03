@@ -15,4 +15,7 @@ namespace Draw
 	void LineRect(int x, int y, int w, int h, int lw, color_t color);
 	void DepthFrame(int x, int y, int w, int h);
 	void DrawWindow(char* Title, int x, int y, int w, int h, color_t color);
+	void DrawVectorLine(float *flSrc, float *flDestination, int lw, color_t color);
+	void Draw3DBox(bool bIsPlayer, Vector vOrigin, Vector vMins, Vector vMaxs, float *flAngles, int lw, color_t color);
+	void Draw3DBox(int EntityID, int lw, color_t color);
 };
