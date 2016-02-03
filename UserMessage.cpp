@@ -348,11 +348,29 @@ int Hooked_DeathMsg(const char *pszName, int iSize, void *pbuf)
 	int IsHeadshot = READ_BYTE();
 	char* TruncatedWeaponName = READ_STRING();
 
-	if (IsHeadshot)
+	// Suicides
+	if (KillerID == 0)
 	{
+		HudMessage::Add("%s suicided from %s", g_Player[VictimID].Name, TruncatedWeaponName);
+	}
+
+	// Register headshot
+	if (IsHeadshot)
 		++g_Player[KillerID].Headshots;
-		if (KillerID == g_Local.Index)
+
+	// Register local player stuff
+	if (KillerID == g_Local.Index)
+	{
+		if (IsHeadshot)
+		{
 			++g_Local.Headshots;
+			HudMessage::Add("Headbanged %s with %s", g_Player[VictimID].Name, TruncatedWeaponName);
+		}
+		else
+		{
+			HudMessage::Add("Killed %s with %s", g_Player[VictimID].Name, TruncatedWeaponName);
+		}
+
 	}
 
 	return oDeathMsg(pszName, iSize, pbuf);
