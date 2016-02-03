@@ -59,6 +59,7 @@
 #include "Studio.h"
 #include "UserMessage.h"
 #include "WeaponList.h"
+#include "WeaponInfo.h"
 // ===================================================================================
 
 
