@@ -46,7 +46,7 @@ void HUD_Redraw(float time, int intermission)
 		ESP::DrawESP();
 		
 		//Draw::DrawString(false, 200, 200, rgb(255, 0, 0), "%s", ESP::GetSequenceString(g_Local.Index).c_str());
-
+		
 		// Draw menu and console
 		Menu::DrawMenu(rgb(168, 0, 0, 225), rgb(255, 168, 0, 225));
 		Console::DrawConsole(rgb(168, 0, 0, 225));
@@ -75,6 +75,16 @@ void V_CalcRefdef(ref_params_t *pParams)
 	g_oExport.V_CalcRefdef(pParams);
 	for (int i = 0; i <= MAX_CLIENTS; ++i)
 		g_Player[i].GotFirstBoneMatrix = false;
+}
+
+void HUD_PostRunCmd(local_state_s *from, local_state_s *to, usercmd_s *cmd, int runfuncs, double time, unsigned int random_seed)
+{
+	g_oExport.HUD_PostRunCmd(from, to, cmd, runfuncs, time, random_seed);
+	if (runfuncs)
+	{
+		g_Local.FOV = to->client.fov;
+		g_Local.WeaponID = to->client.m_iId;
+	}
 }
 // ===================================================================================
 
@@ -145,6 +155,7 @@ void HookExportTable()
 	g_pExport->HUD_Redraw = HUD_Redraw;
 	g_pExport->HUD_Key_Event = HUD_Key_Event;
 	g_pExport->V_CalcRefdef = V_CalcRefdef;
+	g_pExport->HUD_PostRunCmd = HUD_PostRunCmd;
 }
 
 void UnhookExportTable()

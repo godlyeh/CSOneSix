@@ -972,7 +972,7 @@ int Hooked_Location(const char *pszName, int iSize, void *pbuf)
 	return oLocation(pszName, iSize, pbuf);
 }
 
-int Hooked_TeamInfo(const char *pszName, int iSize, void *pbuf)
+int Hooked_TeamInfo(const char *pszName, int iSize, void *pbuf) 
 {
 	// Supported Mods:	Counter-Strike • Counter-Strike: Condition Zero • Deathmatch Classic • Half-Life: Opposing Force • Natural Selection • Ricochet • Sven Co-op • Team Fortress Classic • Half-Life Deathmatch
 	/*

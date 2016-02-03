@@ -60,8 +60,10 @@ class LocalPlayer : public EntityInfo // Local info
 {
 public:
 	// Client info
+	int WeaponID;
 	int Health;
 	int Armor;
+	float FOV;
 	bool IsOnTrain;
 	int Money;
 	int RoundTime;

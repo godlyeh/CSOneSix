@@ -112,6 +112,13 @@ void ESP::DrawWeapon(int EntityID)
 	// Weapon names on ground
 	if (Variable::WeaponGroundName && strlen(Entity->Weapon) > 0)
 		Draw::DrawString(true, true, vScreen, rgb(255, 255, 0), Entity->Weapon);
+
+	// Distance
+	if (Variable::DistanceGround)
+	{
+		Draw::DrawString(true, true, vScreen, rgb(255, 255, 0), "%.0fm", VectorDistance(g_Local.Origin, Entity->Origin) / 22.0f);
+		YSTEP;
+	}
 }
 
 void ESP::DrawEntity(int EntityID)
@@ -131,6 +138,13 @@ void ESP::DrawEntity(int EntityID)
 	// Hostage
 	if (Variable::Hostage && Entity->IsHostage)
 		Draw::DrawString(true, true, vScreen, rgb(255, 255, 0), "Hostage");
+
+	// Distance
+	if (Variable::DistanceEntity)
+	{
+		Draw::DrawString(true, true, vScreen, rgb(255, 255, 0), "%.0fm", VectorDistance(g_Local.Origin, Entity->Origin) / 22.0f);
+		YSTEP;
+	}
 }
 
 void ESP::DrawESP()
