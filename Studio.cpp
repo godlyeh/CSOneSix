@@ -61,7 +61,7 @@ bool StudioHelper::IsVisible(int PlayerID)
 
 // ===================================================================================
 // Studio hooks
-int StudioCheckBBox() // Force studio to check bounding boxes (for hitbox on players behind)
+int StudioCheckBBox() // Force studio to check players behind us (for bone calc etc)
 {
 	cl_entity_t* pEntity = g_oStudio.GetCurrentEntity();
 	if (EngineHelper::ValidPlayer(pEntity->index))
@@ -91,6 +91,10 @@ void RestoreRenderer()
 
 			g_Player[pEntity->index].Visible = StudioHelper::IsVisible(pEntity->index);
 			g_Player[pEntity->index].bGotBoneMatrix = true;
+
+			// Set aim vector
+			Aimbot::GetAimVector(pEntity->index, g_Player[pEntity->index].AimOrigin);
+			g_Player[pEntity->index].AimOriginVisible = EngineHelper::IsPointVisible(g_Player[pEntity->index].AimOrigin);
 		}
 	}
 

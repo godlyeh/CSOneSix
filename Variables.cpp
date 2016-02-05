@@ -11,8 +11,13 @@
 
 // Aimbot
 REG_INT(Aimbot) = 1;
+REG_INT(AimAutoshoot) = 1;
+REG_INT(AimKey) = 0;
 REG_INT(AimPosition) = 0;
 REG_INT(AimDrawPosition) = 1;
+REG_INT(AimDrawTarget) = 1;
+REG_INT(AimTeam) = 0;
+REG_INT(AimLock) = 1;
 
 // Player ESP
 REG_INT(Name) = 1;
@@ -47,8 +52,13 @@ void Variable::Initialize()
 
 	// Aimbot
 	REGISTER_INT(Aimbot, 0, 1);
+	REGISTER_INT(AimAutoshoot, 0, 1);
+	REGISTER_INT(AimKey, 0, 3);
 	REGISTER_INT(AimPosition, 0, 3);
 	REGISTER_INT(AimDrawPosition, 0, 1);
+	REGISTER_INT(AimDrawTarget, 0, 1);
+	REGISTER_INT(AimTeam, 0, 2);
+	REGISTER_INT(AimLock, 0, 1);
 
 	// Player ESP
 	REGISTER_INT(Name, 0, 1);

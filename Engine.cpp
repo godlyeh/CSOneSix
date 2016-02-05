@@ -152,6 +152,26 @@ void EngineHelper::VectorAngles(const float *flForward, float *flAngles)
 	flAngles[2] = 0;
 }
 
+void EngineHelper::VectorToViewangles(float *flOrigin, float *flOut)
+{
+	Vector vDest, vAngles;
+	VectorSubtract(flOrigin, g_Local.EyePosition, vDest);
+	VectorAngles(vDest, vAngles);
+	vAngles[0] *= -1.0f;
+	BoundAngles(vAngles);
+	VectorCopy(vAngles, flOut);
+}
+
+void EngineHelper::BoundAngles(float *flViewAngles)
+{
+	for (int i = 0; i < 2; ++i)
+	{
+		if (flViewAngles[i] > 180.0f) flViewAngles[i] -= 360.0f;
+		if (flViewAngles[i] < -180.0f) flViewAngles[i] += 360.0f;
+	}
+	flViewAngles[2] = 0;
+}
+
 // Init
 void EngineHelper::InitHUD()
 {

@@ -8,6 +8,9 @@
 // ESP handler
 color_t ESP::GetTeamColor(int PlayerID)
 {
+	if (g_Local.Team == NULL)
+		return rgb(128, 128, 128);
+
 	if (g_Player[PlayerID].Team != NULL)
 	{
 		if (g_Player[PlayerID].Team->TeamNumber == 1) // Terrorist
@@ -118,7 +121,7 @@ void ESP::DrawPlayer(int PlayerID)
 	{
 		Aimbot::GetAimVector(PlayerID, vOrigin);
 		if (EngineHelper::WorldToScreen(vOrigin, vScreen))
-			Draw::FillRGBA((int)vScreen.x, (int)vScreen.y, 2, 2, rgb(128, 0, 0));
+			Draw::FillRGBA((int)vScreen.x - 1, (int)vScreen.y - 1, 3, 3, rgb(128, 0, 0));
 	}
 }
 

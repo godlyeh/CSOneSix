@@ -43,6 +43,10 @@ public:
 	Vector RadarCoord; // Team only
 	Vector Mins, Maxs;
 
+	// Aiming
+	Vector AimOrigin;
+	bool AimOriginVisible;
+
 	// Bone
 	bool bGotBoneMatrix;
 	TransformMatrix BoneMatrix;

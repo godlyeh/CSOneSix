@@ -29,6 +29,8 @@ namespace EngineHelper
 	bool WorldToScreen(float* Origin, float* Out);
 	void AngleVectors(float *flAngles, float *flForward, float *flRight, float *flUp);
 	void VectorAngles(const float *flForward, float *flAngles);
+	void VectorToViewangles(float *flOrigin, float *flOut);
+	void BoundAngles(float *flViewAngles);
 
 	// Init
 	void InitHUD();

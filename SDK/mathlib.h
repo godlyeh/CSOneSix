@@ -103,8 +103,6 @@ void FloorDivMod (double numer, double denom, int *quotient,
 fixed16_t Invert24To16(fixed16_t val);
 int GreatestCommonDivisor (int i1, int i2);
 
-void AngleVectors (const vec3_t angles, vec3_t forward, vec3_t right, vec3_t up);
-void AngleVectorsTranspose (const vec3_t angles, vec3_t forward, vec3_t right, vec3_t up);
 #define AngleIVectors	AngleVectorsTranspose
 
 void AngleMatrix (const vec3_t angles, float (*matrix)[4] );
@@ -112,7 +110,6 @@ void AngleIMatrix (const vec3_t angles, float (*matrix)[4] );
 void VectorTransform (const vec3_t in1, float in2[3][4], vec3_t out);
 
 void VectorMatrix( vec3_t forward, vec3_t right, vec3_t up);
-void VectorAngles( const vec3_t forward, vec3_t angles );
 
 int BoxOnPlaneSide (vec3_t emins, vec3_t emaxs, struct mplane_s *plane);
 float	anglemod(float a);

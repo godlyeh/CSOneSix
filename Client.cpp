@@ -23,15 +23,21 @@ void CL_CreateMove(float frametime, usercmd_t* cmd, int active)
 		glClear(GL_COLOR_BUFFER_BIT);
 	}*/
 
-	// Update Players
 	if (EngineHelper::IsConnected())
 	{
+		// Update Players
 		g_Local.Update();
 		for (int i = 0; i <= MAX_CLIENTS; ++i)
 			g_Player[i].UpdateInfo();
 
 		for (int i = 0; i < g_Local.EntityCount; ++i)
 			g_Entity[i].UpdateInfo();
+
+		// Aimbot
+		if (Variable::Aimbot)
+		{
+			Aimbot::CL_CreateMove(cmd);
+		}
 	}
 }
 
@@ -45,6 +51,8 @@ void HUD_Redraw(float time, int intermission)
 		// Draw ESP
 		ESP::DrawESP();
 		
+		//Draw::DrawString(false, 200, 200, rgb(255, 0, 0), "0x%p", g_Local.Team);
+
 		// Draw menu and console
 		Menu::DrawMenu(rgb(168, 0, 0, 225), rgb(255, 168, 0, 225));
 		Console::DrawConsole(rgb(168, 0, 0, 225));
@@ -75,6 +83,9 @@ void V_CalcRefdef(ref_params_t *pParams)
 	for (int i = 0; i <= MAX_CLIENTS; ++i)
 	{
 		g_Player[i].bGotBoneMatrix = false;
+
+		// Reset trace (not fully necesarry unless ur doing something with dead ents)
+		g_Player[i].AimOriginVisible = false;
 		for (int x = 0; x < MAXSTUDIOBONES; ++x)
 			g_Player[i].BoneVisible[x] = false;
 	}

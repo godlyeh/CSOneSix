@@ -25,8 +25,13 @@ namespace Variable
 
 	// Aimbot
 	REG_INTEX(Aimbot);
+	REG_INTEX(AimAutoshoot);
+	REG_INTEX(AimKey);
 	REG_INTEX(AimPosition);
 	REG_INTEX(AimDrawPosition);
+	REG_INTEX(AimDrawTarget);
+	REG_INTEX(AimTeam);
+	REG_INTEX(AimLock);
 
 	// Player ESP
 	REG_INTEX(Name);

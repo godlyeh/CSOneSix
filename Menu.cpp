@@ -9,6 +9,8 @@
 char mnuToggleModifier[][32] = { "OFF", "ON" };
 
 char mnuAimPosition[][32] = { "HEAD", "NECK", "CHEST", "STOMACH" };
+char mnuAimTeam[][32] = { "ENEMY", "FRIENDLY", "BOTH" };
+char mnuAimKey[][32] = { "AUTOAIM", "MOUSE1", "MOUSE2", "MOUSE3" };
 
 char mnuBoxESP[][32] = { "OFF", "3D", "NORMAL" };
 
@@ -26,8 +28,13 @@ void Menu::FillMenuArray()
 	if (RegisterEntry("AIMBOT", &AIMBOT))
 	{
 		RegisterEntry("Aimbot", &Variable::Aimbot, 1, mnuToggleModifier);
+		RegisterEntry("Autoshoot", &Variable::AimAutoshoot, 1, mnuToggleModifier);
+		RegisterEntry("Activation Key", &Variable::AimKey, 1, mnuAimKey);
+		RegisterEntry("Team", &Variable::AimTeam, 1, mnuAimTeam);
+		RegisterEntry("Lock", &Variable::AimLock, 1, mnuToggleModifier);
 		RegisterEntry("Position", &Variable::AimPosition, 1, mnuAimPosition);
 		RegisterEntry("Draw Position", &Variable::AimDrawPosition, 1, mnuToggleModifier);
+		RegisterEntry("Draw Target", &Variable::AimDrawTarget, 1, mnuToggleModifier);
 	}
 
 	if (RegisterEntry("PLAYER ESP", &PLAYERESP))
