@@ -11,7 +11,7 @@ void Aimbot::GetAimVector(int PlayerID, float* Out)
 	if (Variable::AimPosition == 2) iBone = 5;
 	if (Variable::AimPosition == 3) iBone = 2;
 	Vector vF, vR, vU, vOrigin;
-	StudioHelper::GetPlayerBone(PlayerID, 0, iBone, vOrigin);
+	StudioHelper::GetPlayerBone(PlayerID, iBone, vOrigin);
 	if (g_Player[PlayerID].Ducking)
 		vOrigin.z += 2;
 
@@ -23,5 +23,21 @@ void Aimbot::GetAimVector(int PlayerID, float* Out)
 	}
 
 	VectorCopy(vOrigin, Out);
+}
+
+int Aimbot::FindTarget(float* Out)
+{
+	// Invalidate target
+	int iTarget = -1;
+
+	// Loop players and get best target
+	for (int i = 0; i <= MAX_CLIENTS; ++i)
+	{
+		EntityInfo* Player = &g_Player[i];
+		if (!EngineHelper::ValidPlayer(i))
+			continue;
+	}
+
+	return iTarget;
 }
 // ===================================================================================

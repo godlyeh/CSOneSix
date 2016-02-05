@@ -12,11 +12,15 @@ color_t ESP::GetTeamColor(int PlayerID)
 	{
 		if (g_Player[PlayerID].Team->TeamNumber == 1) // Terrorist
 		{
+			if (g_Player[PlayerID].Visible)
+				return rgb(255, 0, 128);
 			return rgb(255, 0, 0);
 		}
 
 		if (g_Player[PlayerID].Team->TeamNumber == 2) // CT
 		{
+			if (g_Player[PlayerID].Visible)
+				return rgb(0, 128, 255);
 			return rgb(0, 0, 255);
 		}
 	}

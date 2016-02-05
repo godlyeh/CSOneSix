@@ -31,24 +31,70 @@ mstudiobone_t* StudioHelper::GetStudioBone(int PlayerID, int BoneID)
 	return &((mstudiobone_t*)((byte*)pStudioHdr + pStudioHdr->boneindex))[BoneID];
 }
 
-void StudioHelper::GetPlayerBone(int PlayerID, int BoneGroup, int BoneID, float* Out)
+void StudioHelper::GetPlayerBone(int PlayerID, int BoneID, float* Out)
 {
 	Vector vBone;
 
-	if (BoneGroup)
+	vBone[0] = g_Player[PlayerID].BoneMatrix[BoneID][0][3];
+	vBone[1] = g_Player[PlayerID].BoneMatrix[BoneID][1][3];
+	vBone[2] = g_Player[PlayerID].BoneMatrix[BoneID][2][3];
+	VectorCopy(vBone, Out);
+}
+
+bool StudioHelper::IsVisible(int PlayerID)
+{
+	// Do main trace first
+	Vector vMainPos;
+	Aimbot::GetAimVector(PlayerID, vMainPos);
+	if (EngineHelper::IsPointVisible(vMainPos))
+		return true;
+
+	// Loop bones
+	for (int i = 0; i < 33; ++i)
+		if (g_Player[PlayerID].BoneVisible[i] == true)
+			return true;
+
+	return false;
+}
+// ===================================================================================
+
+
+// ===================================================================================
+// Studio hooks
+int StudioCheckBBox() // Force studio to check bounding boxes (for hitbox on players behind)
+{
+	cl_entity_t* pEntity = g_oStudio.GetCurrentEntity();
+	if (EngineHelper::ValidPlayer(pEntity->index))
+		return 1;
+
+	return g_oStudio.StudioCheckBBox();
+}
+
+void RestoreRenderer()
+{
+	cl_entity_t* pEntity = g_oStudio.GetCurrentEntity();
+
+	if (EngineHelper::ValidPlayer(pEntity->index))
 	{
-		vBone[0] = g_Player[PlayerID].BoneMatrix2[BoneID][0][3];
-		vBone[1] = g_Player[PlayerID].BoneMatrix2[BoneID][1][3];
-		vBone[2] = g_Player[PlayerID].BoneMatrix2[BoneID][2][3];
-		VectorCopy(vBone, Out);
+		if (!g_Player[pEntity->index].bGotBoneMatrix)
+		{
+			for (int i = 0; i < 33; ++i)
+			{
+				TransformMatrix* pBoneMatrix = (TransformMatrix*)g_oStudio.StudioGetBoneTransform();
+				Vector vPoint = Vector((*pBoneMatrix)[i][0][3], (*pBoneMatrix)[i][1][3], (*pBoneMatrix)[i][2][3]);
+
+				g_Player[pEntity->index].BoneMatrix[i][0][3] = vPoint.x;
+				g_Player[pEntity->index].BoneMatrix[i][1][3] = vPoint.y;
+				g_Player[pEntity->index].BoneMatrix[i][2][3] = vPoint.z;
+				g_Player[pEntity->index].BoneVisible[i] = EngineHelper::IsPointVisible(vPoint);
+			}
+
+			g_Player[pEntity->index].Visible = StudioHelper::IsVisible(pEntity->index);
+			g_Player[pEntity->index].bGotBoneMatrix = true;
+		}
 	}
-	else
-	{
-		vBone[0] = g_Player[PlayerID].BoneMatrix[BoneID][0][3];
-		vBone[1] = g_Player[PlayerID].BoneMatrix[BoneID][1][3];
-		vBone[2] = g_Player[PlayerID].BoneMatrix[BoneID][2][3];
-		VectorCopy(vBone, Out);
-	}
+
+	g_oStudio.RestoreRenderer();
 }
 // ===================================================================================
 
@@ -64,6 +110,9 @@ void HookStudioTable()
 
 	g_pStudio = (engine_studio_api_t*)dwStudioPointer;
 	memcpy(&g_oStudio, g_pStudio, sizeof(engine_studio_api_t));
+
+	g_pStudio->RestoreRenderer = RestoreRenderer;
+	g_pStudio->StudioCheckBBox = StudioCheckBBox;
 }
 
 void UnhookStudioTable()

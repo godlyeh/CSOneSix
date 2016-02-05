@@ -7,5 +7,6 @@ namespace Aimbot
 
 	// Funcs
 	void GetAimVector(int PlayerID, float* Out);
+	int FindTarget(float* Out);
 }
 // ===================================================================================

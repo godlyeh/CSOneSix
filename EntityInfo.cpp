@@ -10,6 +10,7 @@ LocalPlayer g_Local;
 EntityInfo g_Player[MAX_CLIENTS + 1];
 EntityInfo g_Entity[4096];
 int *g_piEntityCount = NULL;
+playermove_t* g_pPlayerMove = NULL;
 // ===================================================================================
 
 
@@ -71,6 +72,12 @@ void EntityInfo::UpdateInfo()
 	if (pEntity->model && Alive && pEntity->model->name && strstr(pEntity->model->name, "models/hostage"))
 		IsHostage = true;
 
+	// Position
+	VectorCopy(pEntity->origin, Origin);
+	VectorCopy(pEntity->angles, Angles);
+	VectorCopy(pEntity->curstate.mins, Mins);
+	VectorCopy(pEntity->curstate.maxs, Maxs);
+
 	// Player specific
 	if (Index >= 0 && Index <= MAX_CLIENTS)
 	{
@@ -105,12 +112,6 @@ void EntityInfo::UpdateInfo()
 			_strupr_s(Weapon);
 		}
 	}
-
-	// Position
-	VectorCopy(pEntity->origin, Origin);
-	VectorCopy(pEntity->angles, Angles);
-	VectorCopy(pEntity->curstate.mins, Mins);
-	VectorCopy(pEntity->curstate.maxs, Maxs);
 }
 
 void LocalPlayer::Reset()
@@ -121,21 +122,21 @@ void LocalPlayer::Reset()
 
 void LocalPlayer::Update()
 {
-	if (EngineHelper::IsConnected())
-	{
-		EntityCount = *g_piEntityCount;
-		Index = g_oEngine.GetLocalPlayer()->index;
-		if (_stricmp(LevelName, g_oEngine.pfnGetLevelName()))
-			strcpy_s(LevelName, g_oEngine.pfnGetLevelName());
+	// Client info
+	EntityCount = *g_piEntityCount;
+	Index = g_oEngine.GetLocalPlayer()->index;
+	if (_stricmp(LevelName, g_oEngine.pfnGetLevelName()))
+		strcpy_s(LevelName, g_oEngine.pfnGetLevelName());
 
-		UpdateInfo();
-	}
+	// Info
+	UpdateInfo();
 }
 
 void InitializePlayerInfos()
 {
 	g_Local.Reset();
 	g_piEntityCount = (int*)Utility->FindPattern("hw.dll", "3B 05 ? ? ? ? 7D 17 8D 04 40");
+	g_pPlayerMove = *(playermove_t**)Utility->FindPattern("client.dll", "8B 0D ? ? ? ? 8D 44 24 28 52");
 
 	for (int i = 0; i <= MAX_CLIENTS; ++i)
 		g_Player[i].Index = i;
@@ -144,5 +145,6 @@ void InitializePlayerInfos()
 
 	Utility->DeleteLog("EntityInfo.txt");
 	Utility->Log("EntityInfo.txt", "Max Entity: 0x%p (%i)\n", g_piEntityCount, *g_piEntityCount);
+	Utility->Log("EntityInfo.txt", "PlayerMove: 0x%p\n", g_pPlayerMove);
 }
 // ===================================================================================

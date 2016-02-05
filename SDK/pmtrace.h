@@ -40,4 +40,15 @@ struct pmtrace_s
 	int         hitgroup;
 };
 
+typedef struct
+{
+	bool finished;
+	bool allsolid;
+	bool startsolid;	// if true, the initial point was in a solid area
+	float dist;
+	float fraction;		// time completed, 1.0 = didn't hit anything
+	float endpos[3];	// final position
+	bool hitsky;
+}strace_t;
+
 #endif

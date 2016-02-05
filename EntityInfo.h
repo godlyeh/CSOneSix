@@ -18,6 +18,7 @@ public:
 
 	// Player info
 	bool IsPlayer;
+	bool Visible;
 	bool Valid;
 	bool Ducking;
 	int Index;
@@ -43,9 +44,9 @@ public:
 	Vector Mins, Maxs;
 
 	// Bone
-	bool GotFirstBoneMatrix;
+	bool bGotBoneMatrix;
 	TransformMatrix BoneMatrix;
-	TransformMatrix BoneMatrix2;
+	bool BoneVisible[MAXSTUDIOBONES];
 
 public:
 	void UpdateInfo();
@@ -76,6 +77,9 @@ public:
 	// Entity info
 	int EntityCount;
 
+	// Location
+	Vector EyePosition;
+
 public:
 	void Reset();
 	void Update();
@@ -91,4 +95,5 @@ extern LocalPlayer g_Local;
 extern EntityInfo g_Player[MAX_CLIENTS + 1];
 extern EntityInfo g_Entity[4096];
 extern int *g_piEntityCount;
+extern playermove_t* g_pPlayerMove;
 // ===================================================================================

@@ -33,6 +33,10 @@ namespace EngineHelper
 	// Init
 	void InitHUD();
 	void Initialize();
+
+	// Trace
+	void MP_TraceLine(float *vecSrc, float *vecEnd, int ignore, pmtrace_t *tr);
+	bool IsPointVisible(float* Point);
 }
 // ===================================================================================
 

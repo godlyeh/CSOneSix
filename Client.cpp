@@ -45,9 +45,6 @@ void HUD_Redraw(float time, int intermission)
 		// Draw ESP
 		ESP::DrawESP();
 		
-		//model_t* WeaponModel = g_oStudio.GetModelByIndex(g_oEngine.GetLocalPlayer()->curstate.weaponmodel);
-		//Draw::DrawString(false, 200, 200, rgb(255, 0, 0), "%s %s", WeaponModel->name, g_Local.Weapon);
-		
 		// Draw menu and console
 		Menu::DrawMenu(rgb(168, 0, 0, 225), rgb(255, 168, 0, 225));
 		Console::DrawConsole(rgb(168, 0, 0, 225));
@@ -74,8 +71,13 @@ int HUD_Key_Event(int down, int keynum, const char *pszCurrentBinding)
 void V_CalcRefdef(ref_params_t *pParams)
 {
 	g_oExport.V_CalcRefdef(pParams);
+	VectorCopy(pParams->vieworg, g_Local.EyePosition);
 	for (int i = 0; i <= MAX_CLIENTS; ++i)
-		g_Player[i].GotFirstBoneMatrix = false;
+	{
+		g_Player[i].bGotBoneMatrix = false;
+		for (int x = 0; x < MAXSTUDIOBONES; ++x)
+			g_Player[i].BoneVisible[x] = false;
+	}
 }
 
 void HUD_PostRunCmd(local_state_s *from, local_state_s *to, usercmd_s *cmd, int runfuncs, double time, unsigned int random_seed)

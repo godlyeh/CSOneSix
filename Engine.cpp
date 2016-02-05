@@ -40,6 +40,9 @@ bool EngineHelper::ValidEntity(int EntityID)
 	if (!pLocal || !pEntity)
 		return false;
 
+	if (pLocal->index == pEntity->index)
+		return false;
+
 	if (pEntity->curstate.messagenum < pLocal->curstate.messagenum)
 		return false;
 
@@ -61,9 +64,6 @@ bool EngineHelper::ValidPlayer(int PlayerID)
 	cl_entity_t* pEntity = g_oEngine.GetEntityByIndex(PlayerID);
 
 	if (pEntity->player == FALSE)
-		return false;
-
-	if (pLocal->index == pEntity->index)
 		return false;
 
 	if (pEntity->curstate.solid != 3)
@@ -176,6 +176,84 @@ void EngineHelper::Initialize()
 	g_pViewMatrix = (ViewMatrix*)Utility->FindPattern("hw.dll", "8D BF ? ? ? ? C7 07 ? ? ? ?");
 	Utility->DeleteLog("Engine.txt");
 	Utility->Log("Engine.txt", "ViewMatrix: 0x%p\n", g_pViewMatrix);
+}
+
+// Trace
+void EngineHelper::MP_TraceLine(float *vecSrc, float *vecEnd, int ignore, pmtrace_t *tr)
+{
+	float tmpSrc[3], length, length1, length2, vecDir[3];
+
+	vecDir[0] = vecEnd[0] - vecSrc[0];
+	vecDir[1] = vecEnd[1] - vecSrc[1];
+	vecDir[2] = vecEnd[2] - vecSrc[2];
+
+	length = VectorLength(vecDir);
+
+	vecDir[0] /= length;
+	vecDir[1] /= length;
+	vecDir[2] /= length;
+
+	if (vecSrc[0] == vecEnd[0] && vecSrc[1] == vecEnd[1] && vecSrc[2] == vecEnd[2])
+	{
+		memset(tr, 0, sizeof(pmtrace_t));
+
+		tr->endpos[0] = vecEnd[0];
+		tr->endpos[1] = vecEnd[1];
+		tr->endpos[2] = vecEnd[2];
+
+		tr->fraction = 1.0f;
+
+		return;
+	}
+
+	g_oEngine.pEventAPI->EV_SetTraceHull(2);
+	g_oEngine.pEventAPI->EV_PlayerTrace(vecSrc, vecEnd, PM_GLASS_IGNORE, -1, tr);
+
+	if (tr->fraction == 0 && tr->startsolid && !tr->allsolid)
+	{
+		tmpSrc[0] = vecSrc[0];
+		tmpSrc[1] = vecSrc[1];
+		tmpSrc[2] = vecSrc[2];
+
+		while (!tr->allsolid && tr->fraction == 0)
+		{
+			tmpSrc[0] += vecDir[0];
+			tmpSrc[1] += vecDir[1];
+			tmpSrc[2] += vecDir[2];
+
+			g_oEngine.pEventAPI->EV_SetTraceHull(2);
+			g_oEngine.pEventAPI->EV_PlayerTrace(tmpSrc, vecEnd, PM_GLASS_IGNORE, -1, tr);
+		}
+
+		if (!tr->allsolid && tr->fraction != 1.0)
+		{
+			tmpSrc[0] = vecEnd[0] - vecSrc[0];
+			tmpSrc[1] = vecEnd[1] - vecSrc[1];
+			tmpSrc[2] = vecEnd[2] - vecSrc[2];
+
+			length1 = VectorLength(tmpSrc);
+
+			tmpSrc[0] = tr->endpos[0] - vecSrc[0];
+			tmpSrc[1] = tr->endpos[1] - vecSrc[1];
+			tmpSrc[2] = tr->endpos[2] - vecSrc[2];
+
+			length2 = VectorLength(tmpSrc);
+
+			tr->fraction = length2 / length1;
+
+			tr->startsolid = 1;
+		}
+	}
+
+	if (tr->allsolid)
+		tr->fraction = 1.0f;
+}
+
+bool EngineHelper::IsPointVisible(float* Point)
+{
+	pmtrace_t Trace;
+	MP_TraceLine(g_Local.EyePosition, Point, g_Local.Index, &Trace);
+	return Trace.fraction == 1.0f;
 }
 // ===================================================================================
 
