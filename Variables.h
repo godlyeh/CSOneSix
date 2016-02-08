@@ -33,6 +33,9 @@ namespace Variable
 	REG_INTEX(AimTeam);
 	REG_INTEX(AimLock);
 
+	// Auto & Removals
+	REG_INTEX(PistolRapidFire);
+
 	// Player ESP
 	REG_INTEX(Name);
 	REG_INTEX(WeaponName);

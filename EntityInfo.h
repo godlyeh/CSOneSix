@@ -21,9 +21,11 @@ public:
 	bool Visible;
 	bool Valid;
 	bool Ducking;
+	int Flags;
 	int Index;
 	int Sequence;
 	int GaitSequence;
+	unsigned int RandomSeed;
 	teaminfo_t* Team;
 
 	// Entity info
@@ -69,6 +71,7 @@ class LocalPlayer : public EntityInfo // Local info
 public:
 	// Client info
 	int WeaponID;
+	int Ammo;
 	int Health;
 	int Armor;
 	float FOV;
@@ -82,7 +85,11 @@ public:
 	int EntityCount;
 
 	// Location
+	Vector ViewAngles;
 	Vector EyePosition;
+	Vector Velocity;
+	Vector SpreadAngles;
+	Vector PunchAngles;
 
 public:
 	void Reset();

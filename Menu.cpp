@@ -10,7 +10,7 @@ char mnuToggleModifier[][32] = { "OFF", "ON" };
 
 char mnuAimPosition[][32] = { "HEAD", "NECK", "CHEST", "STOMACH" };
 char mnuAimTeam[][32] = { "ENEMY", "FRIENDLY", "BOTH" };
-char mnuAimKey[][32] = { "AUTOAIM", "MOUSE1", "MOUSE2", "MOUSE3" };
+char mnuAimKey[][32] = { "AUTOAIM", "MOUSE1", "MOUSE2", "MOUSE3", "MOUSE4", "MOUSE5" };
 
 char mnuBoxESP[][32] = { "OFF", "3D", "NORMAL" };
 
@@ -20,6 +20,7 @@ void Menu::FillMenuArray()
 {
 	MenuStorage.clear();
 	static int AIMBOT = 0;
+	static int REMOVALS = 0;
 	static int PLAYERESP = 0;
 	static int GROUNDESP = 0;
 	static int ENTITYESP = 0;
@@ -37,6 +38,11 @@ void Menu::FillMenuArray()
 		RegisterEntry("Draw Target", &Variable::AimDrawTarget, 1, mnuToggleModifier);
 	}
 
+	if (RegisterEntry("AUTO & REMOVALS", &REMOVALS))
+	{
+		RegisterEntry("Pistol Rapid Fire", &Variable::PistolRapidFire, 1, mnuToggleModifier);
+	}
+
 	if (RegisterEntry("PLAYER ESP", &PLAYERESP))
 	{
 		RegisterEntry("Name", &Variable::Name, 1, mnuToggleModifier);
@@ -44,6 +50,7 @@ void Menu::FillMenuArray()
 		RegisterEntry("Player Actions", &Variable::Sequence, 1, mnuToggleModifier);
 		RegisterEntry("Distance", &Variable::Distance, 1, mnuToggleModifier);
 		RegisterEntry("Draw Aim Position", &Variable::AimDrawPosition, 1, mnuToggleModifier);
+		RegisterEntry("Draw Aim Target", &Variable::AimDrawTarget, 1, mnuToggleModifier);
 		RegisterEntry("Box", &Variable::Box, 1, mnuBoxESP);
 		if (Variable::Box == 2)
 		{

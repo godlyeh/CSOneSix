@@ -6,6 +6,7 @@
 
 // ===================================================================================
 // Variables, etc...
+globalvars_t* g_pGlobals = NULL;
 export_t* g_pExport = NULL;
 export_t g_oExport;
 // ===================================================================================
@@ -13,6 +14,8 @@ export_t g_oExport;
 
 // ===================================================================================
 // Export functions
+float flTest = 0;
+
 void CL_CreateMove(float frametime, usercmd_t* cmd, int active)
 {
 	g_oExport.CL_CreateMove(frametime, cmd, active);
@@ -33,10 +36,32 @@ void CL_CreateMove(float frametime, usercmd_t* cmd, int active)
 		for (int i = 0; i < g_Local.EntityCount; ++i)
 			g_Entity[i].UpdateInfo();
 
+		// Recoil & Spread
+		//if (WeaponInfo::GetWeaponType(g_Local.WeaponID) != WEAPONTYPE_PISTOL)
+		//	WeaponInfo::UpdateSpreadAngles();
+
 		// Aimbot
 		if (Variable::Aimbot)
 		{
 			Aimbot::CL_CreateMove(cmd);
+			if (cmd->buttons &IN_ATTACK)
+			{
+				cmd->viewangles.x += g_Local.SpreadAngles.x;
+				cmd->viewangles.y += g_Local.SpreadAngles.y;
+				cmd->viewangles.x -= g_Local.PunchAngles.x * 2;
+				cmd->viewangles.y -= g_Local.PunchAngles.y * 2;
+			}
+		}
+
+		// Pistol rapid fire
+		if (Variable::PistolRapidFire && WeaponInfo::IsWeaponReady())
+		{
+			weapon_t* pWeapon = WeaponInfo::GetWeaponByID(g_Local.WeaponID);
+			if (WeaponInfo::GetWeaponType(pWeapon->WeaponID) == WEAPONTYPE_PISTOL)
+			{
+				if (pWeapon->NextAttack > 0.0f)
+					cmd->buttons &= ~IN_ATTACK;
+			}
 		}
 	}
 }
@@ -51,7 +76,9 @@ void HUD_Redraw(float time, int intermission)
 		// Draw ESP
 		ESP::DrawESP();
 		
-		//Draw::DrawString(false, 200, 200, rgb(255, 0, 0), "0x%p", g_Local.Team);
+		weapon_t* pWeapon = WeaponInfo::GetWeaponByID(g_Local.WeaponID);
+		if (pWeapon)
+			Draw::DrawString(false, 200, 200, rgb(255, 0, 0), "0x%p %i %p", pWeapon, pWeapon->WeaponBit, sizeof(pWeapon->WeaponBit));
 
 		// Draw menu and console
 		Menu::DrawMenu(rgb(168, 0, 0, 225), rgb(255, 168, 0, 225));
@@ -71,15 +98,26 @@ int HUD_Key_Event(int down, int keynum, const char *pszCurrentBinding)
 	// Handle console keys
 	if (down && Console::HandleKeys(keynum))
 		return 0;
-	//MessageBox(0, Utility->StringA("%i", keynum), 0, 0);
 
 	return g_oExport.HUD_Key_Event(down, keynum, pszCurrentBinding);
 }
 
 void V_CalcRefdef(ref_params_t *pParams)
 {
-	g_oExport.V_CalcRefdef(pParams);
 	VectorCopy(pParams->vieworg, g_Local.EyePosition);
+	WeaponInfo::UpdatePunchAngles(pParams);
+
+	if (pParams->cmd->buttons &IN_ATTACK)
+	{
+		pParams->punchangle[0] -= g_Local.PunchAngles.x * 2;
+		pParams->punchangle[1] -= g_Local.PunchAngles.y * 2;
+		pParams->punchangle[0] += g_Local.SpreadAngles.x;
+		pParams->punchangle[1] += g_Local.SpreadAngles.y;
+	}
+
+	// Call original function
+	g_oExport.V_CalcRefdef(pParams);
+
 	for (int i = 0; i <= MAX_CLIENTS; ++i)
 	{
 		g_Player[i].bGotBoneMatrix = false;
@@ -98,6 +136,17 @@ void HUD_PostRunCmd(local_state_s *from, local_state_s *to, usercmd_s *cmd, int 
 	{
 		g_Local.FOV = to->client.fov;
 		g_Local.WeaponID = to->client.m_iId;
+		g_Local.Ammo = to->weapondata[g_Local.WeaponID].m_iClip;
+		VectorCopy(to->client.velocity, g_Local.Velocity);
+		VectorCopy(cmd->viewangles, g_Local.ViewAngles);
+		g_Local.Flags = to->client.flags;
+		g_Local.RandomSeed = random_seed;
+
+		if (WeaponInfo::IsWeaponReady())
+		{
+			//if (to->weapondata[g_Local.WeaponID].m_flNextPrimaryAttack <= 0.0f)
+				WeaponInfo::UpdateSpreadAngles();
+		}
 	}
 }
 // ===================================================================================
@@ -157,13 +206,16 @@ void AtRoundStart()
 // Export table hook
 void HookExportTable()
 {
+	DWORD dwGlobals = Utility->FindPattern("client.dll", "A1 ? ? ? ? 8D 48 34 8D 50 40 D9 5C 24 1C");
 	DWORD dwExportPointer = Utility->FindPattern("hw.dll", "68 ? ? ? ? E8 ? ? ? ? 83 C4 0C E8 ? ? ? ? E8 ? ? ? ?");
 
-	Utility->DeleteLog("Exports.txt");
-	Utility->Log("Exports.txt", "Export Pointer: 0x%p (Module: 0x%p)\n", dwExportPointer, Utility->CalcModuleOffset(dwExportPointer));
-
+	g_pGlobals = (globalvars_t*)*(PDWORD)dwGlobals;
 	g_pExport = (export_t*)dwExportPointer;
 	memcpy(&g_oExport, g_pExport, sizeof(export_t));
+
+	Utility->DeleteLog("Client.txt");
+	Utility->Log("Client.txt", "Export Pointer: 0x%p (Module: 0x%p)\n", g_pExport, Utility->CalcModuleOffset((DWORD)g_pExport));
+	Utility->Log("Client.txt", "Globals Pointer: 0x%p (Module: 0x%p)\n", g_pGlobals, Utility->CalcModuleOffset((DWORD)g_pGlobals));
 
 	g_pExport->CL_CreateMove = CL_CreateMove;
 	g_pExport->HUD_Redraw = HUD_Redraw;

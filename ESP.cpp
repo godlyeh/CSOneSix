@@ -123,6 +123,10 @@ void ESP::DrawPlayer(int PlayerID)
 		if (EngineHelper::WorldToScreen(vOrigin, vScreen))
 			Draw::FillRGBA((int)vScreen.x - 1, (int)vScreen.y - 1, 3, 3, rgb(128, 0, 0));
 	}
+
+	// Aim Target
+	if (Variable::AimDrawTarget && PlayerID == Aimbot::AimTarget)
+		Draw::DrawString(true, true, vScreen, rgb(255, 255, 255), "AIM TARGET");
 }
 
 void ESP::DrawWeapon(int EntityID)

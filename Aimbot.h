@@ -17,6 +17,7 @@ namespace Aimbot
 	bool ValidTeam(int PlayerID);
 	bool ValidAimTarget(int PlayerID);
 	int FindTarget();
+	bool IsAimkeyPressed();
 	void CL_CreateMove(usercmd_t* pCmd);
 }
 // ===================================================================================

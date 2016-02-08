@@ -162,6 +162,20 @@ void EngineHelper::VectorToViewangles(float *flOrigin, float *flOut)
 	VectorCopy(vAngles, flOut);
 }
 
+long double EngineHelper::VectorNormalize(float *flAngles)
+{
+	long double ldRet = sqrt(flAngles[0] * flAngles[0] + flAngles[1] * flAngles[1] + flAngles[2] * flAngles[2]);
+
+	if (ldRet != 0.0f)
+	{
+		flAngles[0] = flAngles[0] * (1.0f / (float)ldRet);
+		flAngles[1] = flAngles[1] * (1.0f / (float)ldRet);
+		flAngles[2] = flAngles[2] * (1.0f / (float)ldRet);
+	}
+
+	return ldRet;
+}
+
 void EngineHelper::BoundAngles(float *flViewAngles)
 {
 	for (int i = 0; i < 2; ++i)

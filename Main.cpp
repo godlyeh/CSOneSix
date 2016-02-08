@@ -22,6 +22,7 @@ void HookHack()
 	HookEngineTable(); // Hook engine table first
 	Variable::Initialize();
 	InitializePlayerInfos();
+	WeaponInfo::Init();
 
 	HookStudioTable();
 	HookCommandList();

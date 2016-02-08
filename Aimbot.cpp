@@ -83,10 +83,32 @@ int Aimbot::FindTarget() // This is the aim filter, here we pick the best possib
 	return iTarget;
 }
 
+bool Aimbot::IsAimkeyPressed()
+{
+	if (Variable::AimKey == 0)
+		return true;
+
+	int Aimkey = Variable::AimKey;
+	if (Aimkey > 2) ++Aimkey;
+
+	if (GetAsyncKeyState(Aimkey))
+		return true;
+
+	return false;
+}
+
 void Aimbot::CL_CreateMove(usercmd_t* pCmd)
 {
+	// Check aimbot
+	if (Variable::Aimbot == 0 || IsAimkeyPressed() == false)
+		return;
+
+	// If weapon isnt ready, do nothing
+	if (WeaponInfo::IsWeaponReady() == false)
+		return;
+
 	// If aimlock is enabled and aimtarget is still valid, skip findtarget and go directly to aiming
-	if (Variable::AimLock && ValidAimTarget(AimTarget))
+	if (Variable::AimLock && ValidAimTarget(AimTarget)) 
 		goto AimLock;
 
 	// Find best aim target
@@ -100,10 +122,10 @@ void Aimbot::CL_CreateMove(usercmd_t* pCmd)
 		Vector vAimAngles;
 		EngineHelper::VectorToViewangles(g_Player[AimTarget].AimOrigin, vAimAngles);
 		VectorCopy(vAimAngles, pCmd->viewangles);
-		g_oEngine.SetViewAngles(vAimAngles);
+		//g_oEngine.SetViewAngles(vAimAngles);
 		
 		// Autoshoot
-		if (Variable::AimAutoshoot && !(pCmd->buttons &IN_ATTACK) && !(pCmd->buttons &IN_ATTACK2))
+		if (Variable::AimAutoshoot && !(pCmd->buttons &IN_ATTACK) && !(pCmd->buttons &IN_ATTACK2) && !(pCmd->buttons &IN_RELOAD))
 			pCmd->buttons |= IN_ATTACK;
 	}
 

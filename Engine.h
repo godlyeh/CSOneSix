@@ -30,6 +30,7 @@ namespace EngineHelper
 	void AngleVectors(float *flAngles, float *flForward, float *flRight, float *flUp);
 	void VectorAngles(const float *flForward, float *flAngles);
 	void VectorToViewangles(float *flOrigin, float *flOut);
+	long double VectorNormalize(float *flAngles);
 	void BoundAngles(float *flViewAngles);
 
 	// Init
