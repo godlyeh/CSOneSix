@@ -376,7 +376,8 @@ float WeaponInfo::GetSpreadFactor()
 
 		if (!WeaponBit)
 			SpreadFactor -= 0.05f;
-		else if (pWeapon->PistolBurstSpread != 0.0f)
+		
+		if (pWeapon->PistolBurstSpread != 0.0f)
 			SpreadFactor += 0.1f;
 		
 	}

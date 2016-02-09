@@ -29,7 +29,7 @@ void CL_CreateMove(float frametime, usercmd_t* cmd, int active)
 	if (EngineHelper::IsConnected())
 	{
 		// Update Players
-		g_Local.Update();
+		g_Local.Update(frametime);
 		for (int i = 0; i <= MAX_CLIENTS; ++i)
 			g_Player[i].UpdateInfo();
 
@@ -78,9 +78,9 @@ void HUD_Redraw(float time, int intermission)
 		// Draw ESP
 		ESP::DrawESP();
 		
-		weapon_t* pWeapon = WeaponInfo::GetWeaponByID(g_Local.WeaponID);
-		if (pWeapon)
-			Draw::DrawString(false, 200, 200, rgb(255, 0, 0), "0x%p %i %p", pWeapon, pWeapon->WeaponBit, sizeof(pWeapon->WeaponBit));
+		//weapon_t* pWeapon = WeaponInfo::GetWeaponByID(g_Local.WeaponID);
+		//if (pWeapon)
+			Draw::DrawString(false, 200, 200, rgb(255, 0, 0), "(%.2f %.2f %.2f) %.2f (%.2f %.2f)", g_Local.Velocity.x, g_Local.Velocity.y, g_Local.Velocity.z, g_Local.FrameTime, g_Local.Angles.x, g_Local.Angles.y);
 
 		// Draw menu and console
 		Menu::DrawMenu(rgb(168, 0, 0, 225), rgb(255, 168, 0, 225));
@@ -117,6 +117,9 @@ void V_CalcRefdef(ref_params_t *pParams)
 		pParams->punchangle[0] += g_Local.SpreadAngles.x;
 		pParams->punchangle[1] += g_Local.SpreadAngles.y;
 	}
+
+	if (Aimbot::AimTarget != INVALID_TARGET)
+		VectorCopy(Aimbot::AimAngles, pParams->cl_viewangles);
 
 	// Call original function
 	g_oExport.V_CalcRefdef(pParams);
@@ -168,7 +171,7 @@ void AtMapChange()
 void AtRoundStart()
 {
 	// Update necesarry player infos
-	g_Local.Update();
+	g_Local.Update(0);
 
 	// Reset player infos
 	if (g_Local.Frags == g_Local.Deaths == 0)

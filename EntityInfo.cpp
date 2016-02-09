@@ -120,11 +120,12 @@ void LocalPlayer::Reset()
 	LevelName[0] = '\0';
 }
 
-void LocalPlayer::Update()
+void LocalPlayer::Update(float frametime)
 {
 	// Client info
 	EntityCount = *g_piEntityCount;
 	Index = g_oEngine.GetLocalPlayer()->index;
+	FrameTime = frametime;
 	if (_stricmp(LevelName, g_oEngine.pfnGetLevelName()))
 		strcpy_s(LevelName, g_oEngine.pfnGetLevelName());
 

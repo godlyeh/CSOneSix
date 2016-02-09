@@ -97,8 +97,15 @@ bool Aimbot::IsAimkeyPressed()
 	return false;
 }
 
+void Aimbot::PredictVelocityViewangles(float* ViewAngles, float* Velocity, float* Out)
+{
+
+}
+
 void Aimbot::CL_CreateMove(usercmd_t* pCmd)
 {
+	Active = false;
+
 	// Check aimbot
 	if (Variable::Aimbot == 0 || IsAimkeyPressed() == false)
 		return;
@@ -119,14 +126,15 @@ void Aimbot::CL_CreateMove(usercmd_t* pCmd)
 	AimLock:
 
 		// Aim at target
-		Vector vAimAngles;
-		EngineHelper::VectorToViewangles(g_Player[AimTarget].AimOrigin, vAimAngles);
-		VectorCopy(vAimAngles, pCmd->viewangles);
+		EngineHelper::VectorToViewangles(g_Player[AimTarget].AimOrigin, AimAngles);
+		VectorCopy(AimAngles, pCmd->viewangles);
 		//g_oEngine.SetViewAngles(vAimAngles);
 		
 		// Autoshoot
 		if (Variable::AimAutoshoot && !(pCmd->buttons &IN_ATTACK) && !(pCmd->buttons &IN_ATTACK2) && !(pCmd->buttons &IN_RELOAD))
 			pCmd->buttons |= IN_ATTACK;
+
+		Active = true;
 	}
 
 }

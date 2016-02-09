@@ -75,6 +75,7 @@ public:
 	int Health;
 	int Armor;
 	float FOV;
+	float FrameTime;
 	bool IsOnTrain;
 	int Money;
 	int RoundTime;
@@ -94,7 +95,7 @@ public:
 
 public:
 	void Reset();
-	void Update();
+	void Update(float frametime);
 };
 
 void InitializePlayerInfos();

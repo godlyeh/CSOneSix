@@ -11,6 +11,7 @@ namespace Aimbot
 	// Variables
 	static bool Active = false;
 	static int AimTarget = -1;
+	static Vector AimAngles;
 
 	// Funcs
 	void GetAimVector(int PlayerID, float* Out);
@@ -18,6 +19,7 @@ namespace Aimbot
 	bool ValidAimTarget(int PlayerID);
 	int FindTarget();
 	bool IsAimkeyPressed();
+	void PredictVelocityViewangles(float* ViewAngles, float* Velocity, float* Out);
 	void CL_CreateMove(usercmd_t* pCmd);
 }
 // ===================================================================================
