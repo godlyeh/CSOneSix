@@ -86,6 +86,7 @@ public:
 
 	// Location
 	Vector ViewAngles;
+	Vector LocalViewAngles;
 	Vector EyePosition;
 	Vector Velocity;
 	Vector SpreadAngles;

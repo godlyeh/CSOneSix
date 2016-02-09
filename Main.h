@@ -44,6 +44,7 @@
 #include "EntityInfo.h"
 #include "Timer.h"
 #include "Utility.h"
+#include "Movement.h"
 
 #include "Aimbot.h"
 #include "Client.h"

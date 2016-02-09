@@ -63,6 +63,8 @@ void CL_CreateMove(float frametime, usercmd_t* cmd, int active)
 					cmd->buttons &= ~IN_ATTACK;
 			}
 		}
+
+		g_pMovement->Fix(cmd, g_Local.LocalViewAngles);
 	}
 }
 
@@ -105,6 +107,7 @@ int HUD_Key_Event(int down, int keynum, const char *pszCurrentBinding)
 void V_CalcRefdef(ref_params_t *pParams)
 {
 	VectorCopy(pParams->vieworg, g_Local.EyePosition);
+	VectorCopy(pParams->cl_viewangles, g_Local.LocalViewAngles);
 	WeaponInfo::UpdatePunchAngles(pParams);
 
 	if (pParams->cmd->buttons &IN_ATTACK)
